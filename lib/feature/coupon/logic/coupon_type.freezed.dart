@@ -122,9 +122,10 @@ class __$$CouponRemoveAdUntilDateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CouponRemoveAdUntilDate implements CouponRemoveAdUntilDate {
+class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
   const _$CouponRemoveAdUntilDate(this.date, {final String? $type})
-      : $type = $type ?? 'removeAdsUntilDate';
+      : $type = $type ?? 'removeAdsUntilDate',
+        super._();
 
   factory _$CouponRemoveAdUntilDate.fromJson(Map<String, dynamic> json) =>
       _$$CouponRemoveAdUntilDateFromJson(json);
@@ -228,9 +229,10 @@ class _$CouponRemoveAdUntilDate implements CouponRemoveAdUntilDate {
   }
 }
 
-abstract class CouponRemoveAdUntilDate implements CouponType {
+abstract class CouponRemoveAdUntilDate extends CouponType {
   const factory CouponRemoveAdUntilDate(final DateTime date) =
       _$CouponRemoveAdUntilDate;
+  const CouponRemoveAdUntilDate._() : super._();
 
   factory CouponRemoveAdUntilDate.fromJson(Map<String, dynamic> json) =
       _$CouponRemoveAdUntilDate.fromJson;
@@ -277,9 +279,10 @@ class __$$CouponRemoveAdForDurationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CouponRemoveAdForDuration implements CouponRemoveAdForDuration {
+class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
   const _$CouponRemoveAdForDuration(this.duration, {final String? $type})
-      : $type = $type ?? 'removeAdsForDuration';
+      : $type = $type ?? 'removeAdsForDuration',
+        super._();
 
   factory _$CouponRemoveAdForDuration.fromJson(Map<String, dynamic> json) =>
       _$$CouponRemoveAdForDurationFromJson(json);
@@ -383,9 +386,10 @@ class _$CouponRemoveAdForDuration implements CouponRemoveAdForDuration {
   }
 }
 
-abstract class CouponRemoveAdForDuration implements CouponType {
+abstract class CouponRemoveAdForDuration extends CouponType {
   const factory CouponRemoveAdForDuration(final Duration duration) =
       _$CouponRemoveAdForDuration;
+  const CouponRemoveAdForDuration._() : super._();
 
   factory CouponRemoveAdForDuration.fromJson(Map<String, dynamic> json) =
       _$CouponRemoveAdForDuration.fromJson;

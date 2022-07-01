@@ -3,7 +3,7 @@
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part "counter_item.g.dart";
+part "coupon_item.g.dart";
 
 @JsonSerializable()
 class CouponItem {
@@ -22,4 +22,9 @@ class CouponItem {
       'isUsed': isUsed,
       'extra': extra.toJson(),
     };
+
+
+  // String toArabicString(){
+  //   return "${extra.toArabicString()} | ";
+  // }
 }

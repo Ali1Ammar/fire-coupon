@@ -1,4 +1,4 @@
-import 'package:coupon/feature/coupon/logic/counter_item.dart';
+import 'package:coupon/feature/coupon/logic/coupon_item.dart';
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
 import 'package:coupon/feature/coupon/logic/generate_hashid.dart';
 import 'package:firebase_database/firebase_database.dart';

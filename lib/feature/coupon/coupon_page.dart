@@ -1,9 +1,11 @@
 import 'package:coupon/feature/coupon/coupon_controller.dart';
+import 'package:coupon/feature/coupon/coupon_list_page.dart';
 import 'package:coupon/feature/coupon/logic/coupon_service.dart';
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
 import 'package:coupon/shared/widget/row_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -14,7 +16,7 @@ class CouponPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final couponController =
-        useMemoized(() => CouponController(CouponService()));
+        ref.watch(couponControllerProvider);
     final nameController = useTextEditingController();
     final countController = useState(1);
     final dayController = useState(1);
@@ -25,7 +27,13 @@ class CouponPage extends HookConsumerWidget {
     final couponTypeController = useState(CouponTypeEnum.removeAdsForDuration);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.of(context).push( MaterialPageRoute(builder: (_)=>CouponListPage()) );
+          }, icon: Icon(Icons.list) )
+        ],
+      ),
       body: SingleChildScrollView(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
