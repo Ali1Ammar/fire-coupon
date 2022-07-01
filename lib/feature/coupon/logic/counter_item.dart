@@ -15,5 +15,11 @@ class CouponItem {
   CouponItem(this.code, this.expire, this.isUsed, this.extra, this.name);
 
   factory CouponItem.fromJson(Map<String, dynamic> json) => _$CouponItemFromJson(json);
-  Map<String, dynamic> toJson() => _$CouponItemToJson(this);
+  Map<String, dynamic> toJson() =>   <String, dynamic>{
+      'name': name,
+      'code': code,
+      'expire': expire.toIso8601String(),
+      'isUsed': isUsed,
+      'extra': extra.toJson(),
+    };
 }

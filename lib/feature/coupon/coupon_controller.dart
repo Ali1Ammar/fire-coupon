@@ -11,7 +11,7 @@ class CouponController   {
     int count,
     DateTime expireCouponDate,
   ) async {
-    await service.generateMulti(CouponType.removeAdsUntilDate(expireCouponDate),
+    return await service.generateMulti(CouponType.removeAdsUntilDate(expireCouponDate),
         expireCouponDate, count, name);
   }
 
@@ -22,7 +22,7 @@ class CouponController   {
     int day,
     int week,
   ) async {
-    await service.generateMulti(
+    return await service.generateMulti(
         CouponType.removeAdsForDuration(Duration(days: day + (week * 7))),
         expireCouponDate,
         count,

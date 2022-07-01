@@ -1,6 +1,7 @@
 import 'package:coupon/feature/coupon/coupon_controller.dart';
 import 'package:coupon/feature/coupon/logic/coupon_service.dart';
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
+import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
 import 'package:coupon/shared/widget/row_picker.dart';
 import 'package:flutter/material.dart';
@@ -152,8 +153,11 @@ class CouponPage extends HookConsumerWidget {
                     state.value = const AsyncSnapshot.withData(
                         ConnectionState.done, null);
                   } catch (e, s) {
+                    showString(context,e.toString());
                     state.value =
                         AsyncSnapshot.withError(ConnectionState.done, e, s);
+                                            rethrow;
+
                   }
                 },
                 child: const Text("انشاء"))

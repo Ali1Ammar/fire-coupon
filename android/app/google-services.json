@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "730482361475",
+    "firebase_url": "https://coupon-test-18a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "coupon-test-18a",
+    "storage_bucket": "coupon-test-18a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730482361475:android:f5e209312201d92b3c07b6",
+        "android_client_info": {
+          "package_name": "com.example.coupon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "730482361475-gpitii4ctqkgj046n593sc6gomtspt4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTLWLmc5hjbkLXieiXzN2YnvPGAbj_A8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "730482361475-gpitii4ctqkgj046n593sc6gomtspt4b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "730482361475-45f9a4ncs3oug3dav85f8nrrjbrbje4k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.coupon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
