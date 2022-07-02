@@ -35,7 +35,7 @@ class CouponService  with FirebaseDb  implements ICouponService{
     final items = hashIds.map((e) => CouponItem(e, expireAt, false, type, name));
     final json = Map.fromEntries(
         items.map((e) => MapEntry(e.code,e.toJson() )));
-    await itemsRef.set( json );//TODO this will remove every old things
+    await itemsRef.update( json );
     return items.toList();
   }
 
