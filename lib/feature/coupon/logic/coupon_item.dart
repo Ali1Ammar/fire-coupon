@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part "coupon_item.g.dart";
 
-@JsonSerializable()
+@JsonSerializable(anyMap: true)
 class CouponItem {
   final String name;
   final String code;
@@ -14,7 +14,7 @@ class CouponItem {
   final CouponType extra;
   CouponItem(this.code, this.expire, this.isUsed, this.extra, this.name);
 
-  factory CouponItem.fromJson(Map<String, dynamic> json) => _$CouponItemFromJson(json);
+  factory CouponItem.fromJson(Map json) => _$CouponItemFromJson(json);
   Map<String, dynamic> toJson() =>   <String, dynamic>{
       'name': name,
       'code': code,

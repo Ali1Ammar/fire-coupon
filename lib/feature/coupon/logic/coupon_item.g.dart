@@ -6,11 +6,11 @@ part of 'coupon_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-CouponItem _$CouponItemFromJson(Map<String, dynamic> json) => CouponItem(
+CouponItem _$CouponItemFromJson(Map json) => CouponItem(
       json['code'] as String,
       DateTime.parse(json['expire'] as String),
       json['isUsed'] as bool,
-      CouponType.fromJson(json['extra'] as Map<String, dynamic>),
+      CouponType.fromJson(Map<String, dynamic>.from(json['extra'] as Map)),
       json['name'] as String,
     );
 

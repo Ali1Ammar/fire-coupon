@@ -1,6 +1,8 @@
+import 'package:coupon/feature/coupon/client/coupon_use_page.dart';
 import 'package:coupon/feature/coupon/coupon_controller.dart';
 import 'package:coupon/feature/coupon/coupon_list_page.dart';
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
+import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
 import 'package:coupon/shared/widget/row_picker.dart';
@@ -13,9 +15,8 @@ class CouponPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final couponController =
-        ref.watch(couponControllerProvider);
-    final nameController = useTextEditingController(text:"remove ads");
+    final couponController = ref.watch(couponControllerProvider);
+    final nameController = useTextEditingController(text: "remove ads");
     final countController = useState(1);
     final dayController = useState(1);
     final weekController = useState(0);
@@ -28,9 +29,18 @@ class CouponPage extends HookConsumerWidget {
       appBar: AppBar(
         title: const Text("genrate coupon"),
         actions: [
-          IconButton(onPressed: (){
-            Navigator.of(context).push( MaterialPageRoute(builder: (_)=>const CouponListPage()) );
-          }, icon: const Icon(Icons.list) )
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const CouponListPage()));
+              },
+              icon: const Icon(Icons.list)),
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const CouponUsePage()));
+              },
+              icon: const Icon(Icons.play_arrow))
         ],
       ),
       body: SingleChildScrollView(
@@ -80,19 +90,22 @@ class CouponPage extends HookConsumerWidget {
             ),
           ),
           Card(
-            child: Column(
-              children: [
-                const Text("used expire date"),
-                InputDatePickerFormField(
-                  initialDate: expireCuponController.value,
-                  firstDate: DateTime.now(),
-                  fieldLabelText: "enter date",
-                  lastDate: DateTime.now().add(const Duration(days: 365)),
-                  onDateSaved: (date) {
-                    expireCuponController.value = date;
-                  },
-                ),
-              ],
+            child: Center(
+              child: Column(
+                children: [
+                  const Text("expire date"),
+                  OutlinedButton(
+                      onPressed: () {
+                        showDatePicker(
+                            context: context,
+                            initialDate: expireCuponController.value,
+                            firstDate: DateTime.now(),
+                            fieldLabelText: "enter date",
+                            lastDate: DateTime.now().add(const Duration(days: 360)));
+                      },
+                      child: Text(formatter.format(expireCuponController.value))),
+                ],
+              ),
             ),
           ),
           if (couponTypeController.value == CouponTypeEnum.removeAdsForDuration)
@@ -169,10 +182,10 @@ class CouponPage extends HookConsumerWidget {
                       state.value = const AsyncSnapshot.withData(
                           ConnectionState.done, null);
                     } catch (e, s) {
-                      showString(context,e.toString());
+                      showString(context, e.toString());
                       state.value =
                           AsyncSnapshot.withError(ConnectionState.done, e, s);
-                                              rethrow;
+                      rethrow;
                     }
                   },
                   child: const Text("create")),
