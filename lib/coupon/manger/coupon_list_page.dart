@@ -1,4 +1,4 @@
-import 'package:coupon/feature/coupon/logic/coupon_repo.dart';
+import 'package:coupon/coupon/manger/logic/coupon_repo.dart';
 import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:flutter/material.dart';

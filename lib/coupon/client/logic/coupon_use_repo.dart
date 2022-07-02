@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:coupon/feature/coupon/logic/coupon_item.dart';
+import 'package:coupon/coupon/manger/logic/coupon_item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

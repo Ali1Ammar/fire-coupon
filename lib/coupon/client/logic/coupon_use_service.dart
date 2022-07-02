@@ -1,19 +1,19 @@
 import 'dart:io';
 
-import 'package:coupon/feature/coupon/client/logic/exception.dart';
-import 'package:coupon/feature/coupon/logic/coupon_item.dart';
+import 'package:coupon/coupon/client/logic/exception.dart';
+import 'package:coupon/coupon/manger/logic/coupon_item.dart';
+import 'package:coupon/shared/logic/firebase_db.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final couponUseServiceProvider = Provider(
     (_) => Platform.isAndroid ? CouponUseService() : FakeCouponUseService());
 
-class CouponUseService {
-  final db = FirebaseDatabase.instance.ref("Coupon");
-
+class CouponUseService with FirebaseDb implements ICouponUseService {
+  @override
   Future<CouponItem> use(String code) async {
     Exception? exception;
-    final res = await db.child("items").child(code).runTransaction((value) {
+    final res = await itemsRef.child(code).runTransaction((value) {
       exception = null;
       if (value == null) {
         exception = UnExistCouponException();
@@ -51,11 +51,11 @@ class CouponUseService {
   }
 }
 
-class FakeCouponUseService implements CouponUseService {
-  @override
-  // TODO: implement db
-  DatabaseReference get db => throw UnimplementedError();
+abstract class ICouponUseService {
+  Future<CouponItem> use(String code);
+}
 
+class FakeCouponUseService implements ICouponUseService {
   @override
   Future<CouponItem> use(String code) {
     // TODO: implement use

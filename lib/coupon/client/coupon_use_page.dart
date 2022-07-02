@@ -1,5 +1,5 @@
-import 'package:coupon/feature/coupon/client/coupon_use_controller.dart';
-import 'package:coupon/feature/coupon/client/logic/coupon_use_repo.dart';
+import 'package:coupon/coupon/client/coupon_use_controller.dart';
+import 'package:coupon/coupon/client/logic/coupon_use_repo.dart';
 import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:flutter/material.dart';

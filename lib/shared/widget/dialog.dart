@@ -4,11 +4,11 @@ showString(BuildContext context, String txt) {
   showDialog(
       context: context,
       builder: (_) => AlertDialog(
-            title: Text(''),
+            title: const Text('alert'),
             content: Text(txt),
             actions: [
               TextButton(
-                child: Text('OK'),
+                child: const Text('OK'),
                 onPressed: () => Navigator.of(context).pop(),
               )
             ],

@@ -1,6 +1,6 @@
 
 
-import 'package:coupon/feature/coupon/logic/coupon_type.dart';
+import 'package:coupon/coupon/manger/logic/coupon_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part "coupon_item.g.dart";

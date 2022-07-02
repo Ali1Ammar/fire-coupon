@@ -1,13 +1,13 @@
-import 'package:coupon/feature/coupon/logic/coupon_repo.dart';
-import 'package:coupon/feature/coupon/logic/coupon_service.dart';
-import 'package:coupon/feature/coupon/logic/coupon_type.dart';
+import 'package:coupon/coupon/manger/logic/coupon_repo.dart';
+import 'package:coupon/coupon/manger/logic/coupon_service.dart';
+import 'package:coupon/coupon/manger/logic/coupon_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final couponControllerProvider = Provider(
     (_) => CouponController(_.watch(couponServiceProvider), _.watch(couponRepoProvider)));
 
 class CouponController  {
-  final CouponService service;
+  final ICouponService service;
   final CouponRepo repo;
   CouponController(this.service, this.repo);
 

@@ -1,4 +1,4 @@
-import 'package:coupon/feature/coupon/coupon_page.dart';
+import 'package:coupon/coupon/manger/coupon_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

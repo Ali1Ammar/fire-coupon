@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:coupon/feature/coupon/logic/coupon_item.dart';
-import 'package:coupon/feature/coupon/logic/coupon_type.dart';
-import 'package:coupon/feature/coupon/logic/generate_hashid.dart';
+import 'package:coupon/coupon/manger/logic/coupon_item.dart';
+import 'package:coupon/coupon/manger/logic/coupon_type.dart';
+import 'package:coupon/coupon/manger/logic/generate_hashid.dart';
+import 'package:coupon/shared/logic/firebase_db.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -13,32 +14,33 @@ final couponServiceProvider = Provider((_) {
   return FakeCouponService();
 });
 
-class CouponService {
-  final generator = GenetateHashId();
-  final db = FirebaseDatabase.instance.ref("Coupon");
+class CouponService  with FirebaseDb  implements ICouponService{
+  final _generator = GenetateHashId();
 
+  @override
   Future<CouponItem> generateOne(
       CouponType type, DateTime expireAt, String name) async {
     final counterIndex = await _getCurrentCounterAndInc();
-    final hashId = generator.generateOne(counterIndex);
+    final hashId = _generator.generateOne(counterIndex);
     final item = CouponItem(hashId, expireAt, false, type, name);
-    await db.child('items').child(hashId).set(item.toJson());
+    await codeRef(hashId).set(item.toJson());
     return item;
   }
 
+  @override
   Future<List<CouponItem>> generateMulti(
       CouponType type, DateTime expireAt, int count, String name) async {
     final counterIndex = await _getMultiCounterAndInc(count);
-    final hashIds = generator.generateFrom(counterIndex, count);
+    final hashIds = _generator.generateFrom(counterIndex, count);
     final items = hashIds.map((e) => CouponItem(e, expireAt, false, type, name));
     final json = Map.fromEntries(
         items.map((e) => MapEntry(e.code,e.toJson() )));
-    await db.child('items').set( json );
+    await itemsRef.set( json );//TODO this will remove every old things
     return items.toList();
   }
 
   Future<int> _getCurrentCounterAndInc() async {
-    final res = await db.child('counter').runTransaction((value) {
+    final res = await counterRef.runTransaction((value) {
       if (value == null) {
         return Transaction.success(1);
       }
@@ -51,7 +53,7 @@ class CouponService {
 
   //return starting index of coupon items
   Future<int> _getMultiCounterAndInc(int numberToGet) async {
-    final res = await db.child('counter').runTransaction((value) {
+    final res = await counterRef.runTransaction((value) {
       if (value == null) {
         return Transaction.success(numberToGet);
       }
@@ -64,24 +66,15 @@ class CouponService {
 }
 
 
-class FakeCouponService implements CouponService{
-  final map = {};
-  @override
-  Future<int> _getCurrentCounterAndInc() {
-    // TODO: implement _getCurrentCounterAndInc
-    throw UnimplementedError();
-  }
+abstract class ICouponService {
 
-  @override
-  Future<int> _getMultiCounterAndInc(int numberToGet) {
-    // TODO: implement _getMultiCounterAndInc
-    throw UnimplementedError();
-  }
+  Future<List<CouponItem>> generateMulti(CouponType type, DateTime expireAt, int count, String name);
 
-  @override
-  // TODO: implement db
-  DatabaseReference get db => throw UnimplementedError();
+  Future<CouponItem> generateOne(CouponType type, DateTime expireAt, String name);
 
+}
+
+class FakeCouponService implements ICouponService{
   @override
   Future<List<CouponItem>> generateMulti(CouponType type, DateTime expireAt, int count, String name) {
     // TODO: implement generateMulti
@@ -93,8 +86,4 @@ class FakeCouponService implements CouponService{
     // TODO: implement generateOne
     throw UnimplementedError();
   }
-
-  @override
-  // TODO: implement generator
-  GenetateHashId get generator => throw UnimplementedError();
 }

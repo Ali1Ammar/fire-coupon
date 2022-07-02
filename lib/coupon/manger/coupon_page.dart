@@ -1,7 +1,7 @@
-import 'package:coupon/feature/coupon/client/coupon_use_page.dart';
-import 'package:coupon/feature/coupon/coupon_controller.dart';
-import 'package:coupon/feature/coupon/coupon_list_page.dart';
-import 'package:coupon/feature/coupon/logic/coupon_type.dart';
+import 'package:coupon/coupon/client/coupon_use_page.dart';
+import 'package:coupon/coupon/manger/coupon_controller.dart';
+import 'package:coupon/coupon/manger/coupon_list_page.dart';
+import 'package:coupon/coupon/manger/logic/coupon_type.dart';
 import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
