@@ -1,11 +1,9 @@
 import 'package:coupon/feature/coupon/coupon_controller.dart';
 import 'package:coupon/feature/coupon/coupon_list_page.dart';
-import 'package:coupon/feature/coupon/logic/coupon_service.dart';
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
 import 'package:coupon/shared/widget/row_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -17,7 +15,7 @@ class CouponPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final couponController =
         ref.watch(couponControllerProvider);
-    final nameController = useTextEditingController();
+    final nameController = useTextEditingController(text:"remove ads");
     final countController = useState(1);
     final dayController = useState(1);
     final weekController = useState(0);
@@ -28,58 +26,67 @@ class CouponPage extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
+        title: const Text("genrate coupon"),
         actions: [
           IconButton(onPressed: (){
-            Navigator.of(context).push( MaterialPageRoute(builder: (_)=>CouponListPage()) );
-          }, icon: Icon(Icons.list) )
+            Navigator.of(context).push( MaterialPageRoute(builder: (_)=>const CouponListPage()) );
+          }, icon: const Icon(Icons.list) )
         ],
       ),
       body: SingleChildScrollView(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SinglePicker<CouponTypeEnum>(
-                axis: Axis.vertical,
-                items: CouponTypeEnum.values,
-                currentValue: couponTypeController.value,
-                getTitle: (v) => v.arabicTitle,
-                onChanged: (v) {
-                  couponTypeController.value = v;
-                }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: "اسم"),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SinglePicker<CouponTypeEnum>(
+                  // axis: Axis.vertical,
+                  items: CouponTypeEnum.values,
+                  currentValue: couponTypeController.value,
+                  getTitle: (v) => v.title,
+                  onChanged: (v) {
+                    couponTypeController.value = v;
+                  }),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                const Text("العدد: "),
-                ButtonNumbetPicker(
-                  minValue: 1,
-                  maxValue: 700,
-                  initialValue: 1,
-                  onChanged: (val) {
-                    countController.value = val.toInt();
-                  },
-                ),
-              ],
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: nameController,
+                decoration: const InputDecoration(labelText: "name"),
+              ),
+            ),
+          ),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Text("Count to generate: "),
+                  ButtonNumbetPicker(
+                    minValue: 1,
+                    maxValue: 700,
+                    initialValue: 1,
+                    iconSize: 12,
+                    raduis: 25,
+                    onChanged: (val) {
+                      countController.value = val.toInt();
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
           Card(
             child: Column(
               children: [
-                const Text("انتهاء  صلاحية الاستخدام"),
+                const Text("used expire date"),
                 InputDatePickerFormField(
                   initialDate: expireCuponController.value,
                   firstDate: DateTime.now(),
-                  fieldLabelText: "ادخل تاريخ",
+                  fieldLabelText: "enter date",
                   lastDate: DateTime.now().add(const Duration(days: 365)),
                   onDateSaved: (date) {
                     expireCuponController.value = date;
@@ -94,12 +101,12 @@ class CouponPage extends HookConsumerWidget {
               child: Card(
                 child: Column(
                   children: [
-                    const Text("وقت الكوبون"),
+                    const Text("duration"),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          const Text("يوم: "),
+                          const Text("days: "),
                           ButtonNumbetPicker(
                             minValue: 0,
                             maxValue: 7,
@@ -115,7 +122,7 @@ class CouponPage extends HookConsumerWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          const Text("اسبوع: "),
+                          const Text("weeks: "),
                           ButtonNumbetPicker(
                             minValue: 0,
                             maxValue: 1000,
@@ -134,41 +141,42 @@ class CouponPage extends HookConsumerWidget {
           if (state.value.connectionState == ConnectionState.waiting)
             const CircularProgressIndicator()
           else
-            ElevatedButton(
-                onPressed: () async {
-                  final Future future;
-                  state.value = const AsyncSnapshot.waiting();
-                  switch (couponTypeController.value) {
-                    case CouponTypeEnum.removeAdsUntilDate:
-                      future = couponController.generateRemoveAdsUntilDate(
-                        nameController.text,
-                        countController.value,
-                        expireCuponController.value,
-                      );
-                      break;
-                    case CouponTypeEnum.removeAdsForDuration:
-                      future = couponController.generateRemoveAdsForDuration(
-                        nameController.text,
-                        countController.value,
-                        expireCuponController.value,
-                        dayController.value,
-                        weekController.value,
-                      );
-                      break;
-                  }
-                  try {
-                    await future;
-                    state.value = const AsyncSnapshot.withData(
-                        ConnectionState.done, null);
-                  } catch (e, s) {
-                    showString(context,e.toString());
-                    state.value =
-                        AsyncSnapshot.withError(ConnectionState.done, e, s);
-                                            rethrow;
-
-                  }
-                },
-                child: const Text("انشاء"))
+            Center(
+              child: ElevatedButton(
+                  onPressed: () async {
+                    final Future future;
+                    state.value = const AsyncSnapshot.waiting();
+                    switch (couponTypeController.value) {
+                      case CouponTypeEnum.removeAdsUntilDate:
+                        future = couponController.generateRemoveAdsUntilDate(
+                          nameController.text,
+                          countController.value,
+                          expireCuponController.value,
+                        );
+                        break;
+                      case CouponTypeEnum.removeAdsForDuration:
+                        future = couponController.generateRemoveAdsForDuration(
+                          nameController.text,
+                          countController.value,
+                          expireCuponController.value,
+                          dayController.value,
+                          weekController.value,
+                        );
+                        break;
+                    }
+                    try {
+                      await future;
+                      state.value = const AsyncSnapshot.withData(
+                          ConnectionState.done, null);
+                    } catch (e, s) {
+                      showString(context,e.toString());
+                      state.value =
+                          AsyncSnapshot.withError(ConnectionState.done, e, s);
+                                              rethrow;
+                    }
+                  },
+                  child: const Text("create")),
+            )
         ],
       )),
     );

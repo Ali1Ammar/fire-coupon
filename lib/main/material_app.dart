@@ -10,11 +10,11 @@ class MaterialAppWidget extends StatelessWidget {
     return  ProviderScope(
       child: MaterialApp(
         home: const CouponPage(),
-        locale: const Locale("ar", "EF"),
+        // locale: const Locale("ar", "EF"),
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: const Color.fromARGB(255, 243, 242, 245) 
         ) ,
-        builder: (_,child)=> Directionality(textDirection: TextDirection.rtl, child: child!) ,
+        // builder: (_,child)=> Directionality(textDirection: TextDirection.rtl, child: child!) ,
       ),
     );
   }

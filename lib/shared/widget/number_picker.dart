@@ -128,7 +128,7 @@ class ButtonNumbetPickerState extends State<ButtonNumbetPicker> {
     }
 
     return Container(
-      height: 35,
+      height: 25,
       decoration: BoxDecoration(
           borderRadius: borderRadius2, border: Border.all(color: mainColor)),
       child: Row(

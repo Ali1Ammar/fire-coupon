@@ -21,6 +21,15 @@ class CouponType with _$CouponType {
     );
   }
 
+  bool isExpired() {
+    final now = DateTime.now();
+    return map(
+      removeAdsUntilDate: (data) => data.date.isBefore(now),
+      removeAdsForDuration: (data) =>
+          data.duration.inDays <= now.difference(now).inDays,
+    );
+  }
+
   factory CouponType.fromJson(Map<String, dynamic> json) =>
       _$CouponTypeFromJson(json);
 }
@@ -31,10 +40,10 @@ class CouponType with _$CouponType {
 // }
 
 enum CouponTypeEnum {
-  removeAdsUntilDate("حذف اعلانات لتاريخ"),
-  removeAdsForDuration("حذف اعلانات لمده");
+  removeAdsUntilDate("Until Date"),
+  removeAdsForDuration("For Duration");
 
-  final String arabicTitle;
+  final String title;
 
-  const CouponTypeEnum(this.arabicTitle);
+  const CouponTypeEnum(this.title);
 }

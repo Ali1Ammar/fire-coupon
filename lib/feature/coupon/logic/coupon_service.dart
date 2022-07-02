@@ -1,7 +1,17 @@
+import 'dart:io';
+
 import 'package:coupon/feature/coupon/logic/coupon_item.dart';
 import 'package:coupon/feature/coupon/logic/coupon_type.dart';
 import 'package:coupon/feature/coupon/logic/generate_hashid.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final couponServiceProvider = Provider((_) {
+  if(Platform.isAndroid){
+    return CouponService();
+  } 
+  return FakeCouponService();
+});
 
 class CouponService {
   final generator = GenetateHashId();
@@ -51,4 +61,40 @@ class CouponService {
     final number = (res.snapshot.value as int) - numberToGet;
     return number;
   }
+}
+
+
+class FakeCouponService implements CouponService{
+  final map = {};
+  @override
+  Future<int> _getCurrentCounterAndInc() {
+    // TODO: implement _getCurrentCounterAndInc
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> _getMultiCounterAndInc(int numberToGet) {
+    // TODO: implement _getMultiCounterAndInc
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement db
+  DatabaseReference get db => throw UnimplementedError();
+
+  @override
+  Future<List<CouponItem>> generateMulti(CouponType type, DateTime expireAt, int count, String name) {
+    // TODO: implement generateMulti
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<CouponItem> generateOne(CouponType type, DateTime expireAt, String name) {
+    // TODO: implement generateOne
+    throw UnimplementedError();
+  }
+
+  @override
+  // TODO: implement generator
+  GenetateHashId get generator => throw UnimplementedError();
 }
