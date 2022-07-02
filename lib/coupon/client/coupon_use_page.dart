@@ -1,5 +1,6 @@
 import 'package:coupon/coupon/client/coupon_use_controller.dart';
 import 'package:coupon/coupon/client/logic/coupon_use_repo.dart';
+import 'package:coupon/coupon/client/logic/ui_feature_apapter.dart';
 import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class CouponUsePage extends HookConsumerWidget {
     final state = useState(const AsyncSnapshot.nothing());
     final couponUseController = ref.read(couponUseControllerProvider);
     final usedCoupon = ref.watch(couponUseStreamProvider);
+    final enableUI = ref.watch(uiFeatureApapterStreamProvider).value;
     return Scaffold(
         appBar: AppBar(
           title: const Text('Coupon Use'),
@@ -27,6 +29,7 @@ class CouponUsePage extends HookConsumerWidget {
               ),
               controller: codeController,
             ),
+            if(enableUI?.isAdEnable??false) const Card(child: Text("This is a fake ads")),
             ElevatedButton(
                 onPressed: () async {
                   try {
