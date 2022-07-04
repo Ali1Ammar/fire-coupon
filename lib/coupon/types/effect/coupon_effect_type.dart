@@ -7,25 +7,25 @@ part "coupon_effect_type.g.dart";
 class CouponEffectType with _$CouponEffectType {
   const CouponEffectType._();
 
-  const factory CouponEffectType.removeAdsUntilDate(DateTime date) =
-      CouponRemoveAdUntilDate;
-  const factory CouponEffectType.removeAdsForDuration(Duration duration) =
-      CouponRemoveAdForDuration;
+  const factory CouponEffectType.untilDate(DateTime date) =
+      UntilDate;
+  const factory CouponEffectType.forDuration(Duration duration) =
+      ForDuration;
 
   String toArabicString() {
     return map(
-      removeAdsUntilDate: (data) =>
-          "حذف الاعلانات حتى تاريخ ${data.date.toIso8601String()}",
-      removeAdsForDuration: (data) =>
-          "حذف الاعلانات لمدة ${data.duration.inDays} ايام",
+      untilDate: (data) =>
+          "حتى تاريخ ${data.date.toIso8601String()}",
+      forDuration: (data) =>
+          "لمدة ${data.duration.inDays} ايام",
     );
   }
 
   bool isExpired() {
     final now = DateTime.now();
     return map(
-      removeAdsUntilDate: (data) => data.date.isBefore(now),
-      removeAdsForDuration: (data) =>
+      untilDate: (data) => data.date.isBefore(now),
+      forDuration: (data) =>
           data.duration.inDays <= now.difference(now).inDays,
     );
   }
@@ -34,8 +34,8 @@ class CouponEffectType with _$CouponEffectType {
       _$CouponEffectTypeFromJson(json);
 }
 enum CouponEffectTypeEnum {
-  removeAdsUntilDate("Until Date"),
-  removeAdsForDuration("For Duration");
+  untilDate("Until Date"),
+  forDuration("For Duration");
 
   final String title;
 

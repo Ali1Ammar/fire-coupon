@@ -16,10 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 CouponEffectType _$CouponEffectTypeFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
-    case 'removeAdsUntilDate':
-      return CouponRemoveAdUntilDate.fromJson(json);
-    case 'removeAdsForDuration':
-      return CouponRemoveAdForDuration.fromJson(json);
+    case 'untilDate':
+      return UntilDate.fromJson(json);
+    case 'forDuration':
+      return ForDuration.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'type', 'CouponEffectType',
@@ -31,40 +31,39 @@ CouponEffectType _$CouponEffectTypeFromJson(Map<String, dynamic> json) {
 mixin _$CouponEffectType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateTime date) removeAdsUntilDate,
-    required TResult Function(Duration duration) removeAdsForDuration,
+    required TResult Function(DateTime date) untilDate,
+    required TResult Function(Duration duration) forDuration,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime date)? removeAdsUntilDate,
-    TResult Function(Duration duration)? removeAdsForDuration,
+    TResult Function(DateTime date)? untilDate,
+    TResult Function(Duration duration)? forDuration,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime date)? removeAdsUntilDate,
-    TResult Function(Duration duration)? removeAdsForDuration,
+    TResult Function(DateTime date)? untilDate,
+    TResult Function(Duration duration)? forDuration,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CouponRemoveAdUntilDate value) removeAdsUntilDate,
-    required TResult Function(CouponRemoveAdForDuration value)
-        removeAdsForDuration,
+    required TResult Function(UntilDate value) untilDate,
+    required TResult Function(ForDuration value) forDuration,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CouponRemoveAdUntilDate value)? removeAdsUntilDate,
-    TResult Function(CouponRemoveAdForDuration value)? removeAdsForDuration,
+    TResult Function(UntilDate value)? untilDate,
+    TResult Function(ForDuration value)? forDuration,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CouponRemoveAdUntilDate value)? removeAdsUntilDate,
-    TResult Function(CouponRemoveAdForDuration value)? removeAdsForDuration,
+    TResult Function(UntilDate value)? untilDate,
+    TResult Function(ForDuration value)? forDuration,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -89,30 +88,29 @@ class _$CouponEffectTypeCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$CouponRemoveAdUntilDateCopyWith<$Res> {
-  factory _$$CouponRemoveAdUntilDateCopyWith(_$CouponRemoveAdUntilDate value,
-          $Res Function(_$CouponRemoveAdUntilDate) then) =
-      __$$CouponRemoveAdUntilDateCopyWithImpl<$Res>;
+abstract class _$$UntilDateCopyWith<$Res> {
+  factory _$$UntilDateCopyWith(
+          _$UntilDate value, $Res Function(_$UntilDate) then) =
+      __$$UntilDateCopyWithImpl<$Res>;
   $Res call({DateTime date});
 }
 
 /// @nodoc
-class __$$CouponRemoveAdUntilDateCopyWithImpl<$Res>
+class __$$UntilDateCopyWithImpl<$Res>
     extends _$CouponEffectTypeCopyWithImpl<$Res>
-    implements _$$CouponRemoveAdUntilDateCopyWith<$Res> {
-  __$$CouponRemoveAdUntilDateCopyWithImpl(_$CouponRemoveAdUntilDate _value,
-      $Res Function(_$CouponRemoveAdUntilDate) _then)
-      : super(_value, (v) => _then(v as _$CouponRemoveAdUntilDate));
+    implements _$$UntilDateCopyWith<$Res> {
+  __$$UntilDateCopyWithImpl(
+      _$UntilDate _value, $Res Function(_$UntilDate) _then)
+      : super(_value, (v) => _then(v as _$UntilDate));
 
   @override
-  _$CouponRemoveAdUntilDate get _value =>
-      super._value as _$CouponRemoveAdUntilDate;
+  _$UntilDate get _value => super._value as _$UntilDate;
 
   @override
   $Res call({
     Object? date = freezed,
   }) {
-    return _then(_$CouponRemoveAdUntilDate(
+    return _then(_$UntilDate(
       date == freezed
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
@@ -123,13 +121,13 @@ class __$$CouponRemoveAdUntilDateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
-  const _$CouponRemoveAdUntilDate(this.date, {final String? $type})
-      : $type = $type ?? 'removeAdsUntilDate',
+class _$UntilDate extends UntilDate {
+  const _$UntilDate(this.date, {final String? $type})
+      : $type = $type ?? 'untilDate',
         super._();
 
-  factory _$CouponRemoveAdUntilDate.fromJson(Map<String, dynamic> json) =>
-      _$$CouponRemoveAdUntilDateFromJson(json);
+  factory _$UntilDate.fromJson(Map<String, dynamic> json) =>
+      _$$UntilDateFromJson(json);
 
   @override
   final DateTime date;
@@ -139,14 +137,14 @@ class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
 
   @override
   String toString() {
-    return 'CouponEffectType.removeAdsUntilDate(date: $date)';
+    return 'CouponEffectType.untilDate(date: $date)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CouponRemoveAdUntilDate &&
+            other is _$UntilDate &&
             const DeepCollectionEquality().equals(other.date, date));
   }
 
@@ -157,37 +155,36 @@ class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
 
   @JsonKey(ignore: true)
   @override
-  _$$CouponRemoveAdUntilDateCopyWith<_$CouponRemoveAdUntilDate> get copyWith =>
-      __$$CouponRemoveAdUntilDateCopyWithImpl<_$CouponRemoveAdUntilDate>(
-          this, _$identity);
+  _$$UntilDateCopyWith<_$UntilDate> get copyWith =>
+      __$$UntilDateCopyWithImpl<_$UntilDate>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateTime date) removeAdsUntilDate,
-    required TResult Function(Duration duration) removeAdsForDuration,
+    required TResult Function(DateTime date) untilDate,
+    required TResult Function(Duration duration) forDuration,
   }) {
-    return removeAdsUntilDate(date);
+    return untilDate(date);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime date)? removeAdsUntilDate,
-    TResult Function(Duration duration)? removeAdsForDuration,
+    TResult Function(DateTime date)? untilDate,
+    TResult Function(Duration duration)? forDuration,
   }) {
-    return removeAdsUntilDate?.call(date);
+    return untilDate?.call(date);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime date)? removeAdsUntilDate,
-    TResult Function(Duration duration)? removeAdsForDuration,
+    TResult Function(DateTime date)? untilDate,
+    TResult Function(Duration duration)? forDuration,
     required TResult orElse(),
   }) {
-    if (removeAdsUntilDate != null) {
-      return removeAdsUntilDate(date);
+    if (untilDate != null) {
+      return untilDate(date);
     }
     return orElse();
   }
@@ -195,81 +192,76 @@ class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CouponRemoveAdUntilDate value) removeAdsUntilDate,
-    required TResult Function(CouponRemoveAdForDuration value)
-        removeAdsForDuration,
+    required TResult Function(UntilDate value) untilDate,
+    required TResult Function(ForDuration value) forDuration,
   }) {
-    return removeAdsUntilDate(this);
+    return untilDate(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CouponRemoveAdUntilDate value)? removeAdsUntilDate,
-    TResult Function(CouponRemoveAdForDuration value)? removeAdsForDuration,
+    TResult Function(UntilDate value)? untilDate,
+    TResult Function(ForDuration value)? forDuration,
   }) {
-    return removeAdsUntilDate?.call(this);
+    return untilDate?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CouponRemoveAdUntilDate value)? removeAdsUntilDate,
-    TResult Function(CouponRemoveAdForDuration value)? removeAdsForDuration,
+    TResult Function(UntilDate value)? untilDate,
+    TResult Function(ForDuration value)? forDuration,
     required TResult orElse(),
   }) {
-    if (removeAdsUntilDate != null) {
-      return removeAdsUntilDate(this);
+    if (untilDate != null) {
+      return untilDate(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CouponRemoveAdUntilDateToJson(this);
+    return _$$UntilDateToJson(this);
   }
 }
 
-abstract class CouponRemoveAdUntilDate extends CouponEffectType {
-  const factory CouponRemoveAdUntilDate(final DateTime date) =
-      _$CouponRemoveAdUntilDate;
-  const CouponRemoveAdUntilDate._() : super._();
+abstract class UntilDate extends CouponEffectType {
+  const factory UntilDate(final DateTime date) = _$UntilDate;
+  const UntilDate._() : super._();
 
-  factory CouponRemoveAdUntilDate.fromJson(Map<String, dynamic> json) =
-      _$CouponRemoveAdUntilDate.fromJson;
+  factory UntilDate.fromJson(Map<String, dynamic> json) = _$UntilDate.fromJson;
 
   DateTime get date => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$CouponRemoveAdUntilDateCopyWith<_$CouponRemoveAdUntilDate> get copyWith =>
+  _$$UntilDateCopyWith<_$UntilDate> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CouponRemoveAdForDurationCopyWith<$Res> {
-  factory _$$CouponRemoveAdForDurationCopyWith(
-          _$CouponRemoveAdForDuration value,
-          $Res Function(_$CouponRemoveAdForDuration) then) =
-      __$$CouponRemoveAdForDurationCopyWithImpl<$Res>;
+abstract class _$$ForDurationCopyWith<$Res> {
+  factory _$$ForDurationCopyWith(
+          _$ForDuration value, $Res Function(_$ForDuration) then) =
+      __$$ForDurationCopyWithImpl<$Res>;
   $Res call({Duration duration});
 }
 
 /// @nodoc
-class __$$CouponRemoveAdForDurationCopyWithImpl<$Res>
+class __$$ForDurationCopyWithImpl<$Res>
     extends _$CouponEffectTypeCopyWithImpl<$Res>
-    implements _$$CouponRemoveAdForDurationCopyWith<$Res> {
-  __$$CouponRemoveAdForDurationCopyWithImpl(_$CouponRemoveAdForDuration _value,
-      $Res Function(_$CouponRemoveAdForDuration) _then)
-      : super(_value, (v) => _then(v as _$CouponRemoveAdForDuration));
+    implements _$$ForDurationCopyWith<$Res> {
+  __$$ForDurationCopyWithImpl(
+      _$ForDuration _value, $Res Function(_$ForDuration) _then)
+      : super(_value, (v) => _then(v as _$ForDuration));
 
   @override
-  _$CouponRemoveAdForDuration get _value =>
-      super._value as _$CouponRemoveAdForDuration;
+  _$ForDuration get _value => super._value as _$ForDuration;
 
   @override
   $Res call({
     Object? duration = freezed,
   }) {
-    return _then(_$CouponRemoveAdForDuration(
+    return _then(_$ForDuration(
       duration == freezed
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
@@ -280,13 +272,13 @@ class __$$CouponRemoveAdForDurationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
-  const _$CouponRemoveAdForDuration(this.duration, {final String? $type})
-      : $type = $type ?? 'removeAdsForDuration',
+class _$ForDuration extends ForDuration {
+  const _$ForDuration(this.duration, {final String? $type})
+      : $type = $type ?? 'forDuration',
         super._();
 
-  factory _$CouponRemoveAdForDuration.fromJson(Map<String, dynamic> json) =>
-      _$$CouponRemoveAdForDurationFromJson(json);
+  factory _$ForDuration.fromJson(Map<String, dynamic> json) =>
+      _$$ForDurationFromJson(json);
 
   @override
   final Duration duration;
@@ -296,14 +288,14 @@ class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
 
   @override
   String toString() {
-    return 'CouponEffectType.removeAdsForDuration(duration: $duration)';
+    return 'CouponEffectType.forDuration(duration: $duration)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CouponRemoveAdForDuration &&
+            other is _$ForDuration &&
             const DeepCollectionEquality().equals(other.duration, duration));
   }
 
@@ -314,37 +306,36 @@ class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
 
   @JsonKey(ignore: true)
   @override
-  _$$CouponRemoveAdForDurationCopyWith<_$CouponRemoveAdForDuration>
-      get copyWith => __$$CouponRemoveAdForDurationCopyWithImpl<
-          _$CouponRemoveAdForDuration>(this, _$identity);
+  _$$ForDurationCopyWith<_$ForDuration> get copyWith =>
+      __$$ForDurationCopyWithImpl<_$ForDuration>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(DateTime date) removeAdsUntilDate,
-    required TResult Function(Duration duration) removeAdsForDuration,
+    required TResult Function(DateTime date) untilDate,
+    required TResult Function(Duration duration) forDuration,
   }) {
-    return removeAdsForDuration(duration);
+    return forDuration(duration);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(DateTime date)? removeAdsUntilDate,
-    TResult Function(Duration duration)? removeAdsForDuration,
+    TResult Function(DateTime date)? untilDate,
+    TResult Function(Duration duration)? forDuration,
   }) {
-    return removeAdsForDuration?.call(duration);
+    return forDuration?.call(duration);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(DateTime date)? removeAdsUntilDate,
-    TResult Function(Duration duration)? removeAdsForDuration,
+    TResult Function(DateTime date)? untilDate,
+    TResult Function(Duration duration)? forDuration,
     required TResult orElse(),
   }) {
-    if (removeAdsForDuration != null) {
-      return removeAdsForDuration(duration);
+    if (forDuration != null) {
+      return forDuration(duration);
     }
     return orElse();
   }
@@ -352,51 +343,49 @@ class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(CouponRemoveAdUntilDate value) removeAdsUntilDate,
-    required TResult Function(CouponRemoveAdForDuration value)
-        removeAdsForDuration,
+    required TResult Function(UntilDate value) untilDate,
+    required TResult Function(ForDuration value) forDuration,
   }) {
-    return removeAdsForDuration(this);
+    return forDuration(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(CouponRemoveAdUntilDate value)? removeAdsUntilDate,
-    TResult Function(CouponRemoveAdForDuration value)? removeAdsForDuration,
+    TResult Function(UntilDate value)? untilDate,
+    TResult Function(ForDuration value)? forDuration,
   }) {
-    return removeAdsForDuration?.call(this);
+    return forDuration?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(CouponRemoveAdUntilDate value)? removeAdsUntilDate,
-    TResult Function(CouponRemoveAdForDuration value)? removeAdsForDuration,
+    TResult Function(UntilDate value)? untilDate,
+    TResult Function(ForDuration value)? forDuration,
     required TResult orElse(),
   }) {
-    if (removeAdsForDuration != null) {
-      return removeAdsForDuration(this);
+    if (forDuration != null) {
+      return forDuration(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$CouponRemoveAdForDurationToJson(this);
+    return _$$ForDurationToJson(this);
   }
 }
 
-abstract class CouponRemoveAdForDuration extends CouponEffectType {
-  const factory CouponRemoveAdForDuration(final Duration duration) =
-      _$CouponRemoveAdForDuration;
-  const CouponRemoveAdForDuration._() : super._();
+abstract class ForDuration extends CouponEffectType {
+  const factory ForDuration(final Duration duration) = _$ForDuration;
+  const ForDuration._() : super._();
 
-  factory CouponRemoveAdForDuration.fromJson(Map<String, dynamic> json) =
-      _$CouponRemoveAdForDuration.fromJson;
+  factory ForDuration.fromJson(Map<String, dynamic> json) =
+      _$ForDuration.fromJson;
 
   Duration get duration => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$$CouponRemoveAdForDurationCopyWith<_$CouponRemoveAdForDuration>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ForDurationCopyWith<_$ForDuration> get copyWith =>
+      throw _privateConstructorUsedError;
 }
