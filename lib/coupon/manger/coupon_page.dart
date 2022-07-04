@@ -163,7 +163,7 @@ class CouponPage extends HookConsumerWidget {
                           ButtonNumbetPicker(
                             minValue: 2,
                             maxValue: 700,
-                            initialValue: 1,
+                            initialValue: 2 ,
                             iconSize: 12,
                             raduis: 25,
                             onChanged: (val) {
