@@ -25,6 +25,7 @@ mixin _$CouponItem {
   DateTime get expire => throw _privateConstructorUsedError;
   CouponUsedType get usedType => throw _privateConstructorUsedError;
   CouponEffectType get effectType => throw _privateConstructorUsedError;
+  String get extra => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +43,8 @@ abstract class $CouponItemCopyWith<$Res> {
       String code,
       DateTime expire,
       CouponUsedType usedType,
-      CouponEffectType effectType});
+      CouponEffectType effectType,
+      String extra});
 
   $CouponUsedTypeCopyWith<$Res> get usedType;
   $CouponEffectTypeCopyWith<$Res> get effectType;
@@ -63,6 +65,7 @@ class _$CouponItemCopyWithImpl<$Res> implements $CouponItemCopyWith<$Res> {
     Object? expire = freezed,
     Object? usedType = freezed,
     Object? effectType = freezed,
+    Object? extra = freezed,
   }) {
     return _then(_value.copyWith(
       name: name == freezed
@@ -85,6 +88,10 @@ class _$CouponItemCopyWithImpl<$Res> implements $CouponItemCopyWith<$Res> {
           ? _value.effectType
           : effectType // ignore: cast_nullable_to_non_nullable
               as CouponEffectType,
+      extra: extra == freezed
+          ? _value.extra
+          : extra // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 
@@ -115,7 +122,8 @@ abstract class _$$_CouponItemCopyWith<$Res>
       String code,
       DateTime expire,
       CouponUsedType usedType,
-      CouponEffectType effectType});
+      CouponEffectType effectType,
+      String extra});
 
   @override
   $CouponUsedTypeCopyWith<$Res> get usedType;
@@ -140,6 +148,7 @@ class __$$_CouponItemCopyWithImpl<$Res> extends _$CouponItemCopyWithImpl<$Res>
     Object? expire = freezed,
     Object? usedType = freezed,
     Object? effectType = freezed,
+    Object? extra = freezed,
   }) {
     return _then(_$_CouponItem(
       name: name == freezed
@@ -162,6 +171,10 @@ class __$$_CouponItemCopyWithImpl<$Res> extends _$CouponItemCopyWithImpl<$Res>
           ? _value.effectType
           : effectType // ignore: cast_nullable_to_non_nullable
               as CouponEffectType,
+      extra: extra == freezed
+          ? _value.extra
+          : extra // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -174,7 +187,8 @@ class _$_CouponItem extends _CouponItem {
       required this.code,
       required this.expire,
       required this.usedType,
-      required this.effectType})
+      required this.effectType,
+      required this.extra})
       : super._();
 
   factory _$_CouponItem.fromJson(Map<String, dynamic> json) =>
@@ -190,10 +204,12 @@ class _$_CouponItem extends _CouponItem {
   final CouponUsedType usedType;
   @override
   final CouponEffectType effectType;
+  @override
+  final String extra;
 
   @override
   String toString() {
-    return 'CouponItem(name: $name, code: $code, expire: $expire, usedType: $usedType, effectType: $effectType)';
+    return 'CouponItem(name: $name, code: $code, expire: $expire, usedType: $usedType, effectType: $effectType, extra: $extra)';
   }
 
   @override
@@ -206,7 +222,8 @@ class _$_CouponItem extends _CouponItem {
             const DeepCollectionEquality().equals(other.expire, expire) &&
             const DeepCollectionEquality().equals(other.usedType, usedType) &&
             const DeepCollectionEquality()
-                .equals(other.effectType, effectType));
+                .equals(other.effectType, effectType) &&
+            const DeepCollectionEquality().equals(other.extra, extra));
   }
 
   @JsonKey(ignore: true)
@@ -217,7 +234,8 @@ class _$_CouponItem extends _CouponItem {
       const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(expire),
       const DeepCollectionEquality().hash(usedType),
-      const DeepCollectionEquality().hash(effectType));
+      const DeepCollectionEquality().hash(effectType),
+      const DeepCollectionEquality().hash(extra));
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +254,8 @@ abstract class _CouponItem extends CouponItem {
       required final String code,
       required final DateTime expire,
       required final CouponUsedType usedType,
-      required final CouponEffectType effectType}) = _$_CouponItem;
+      required final CouponEffectType effectType,
+      required final String extra}) = _$_CouponItem;
   const _CouponItem._() : super._();
 
   factory _CouponItem.fromJson(Map<String, dynamic> json) =
@@ -252,6 +271,8 @@ abstract class _CouponItem extends CouponItem {
   CouponUsedType get usedType => throw _privateConstructorUsedError;
   @override
   CouponEffectType get effectType => throw _privateConstructorUsedError;
+  @override
+  String get extra => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CouponItemCopyWith<_$_CouponItem> get copyWith =>

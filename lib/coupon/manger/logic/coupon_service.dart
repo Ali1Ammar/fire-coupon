@@ -19,17 +19,21 @@ class CouponService with FirebaseDb implements ICouponService {
   final _generator = GenetateHashId();
 
   @override
-  Future<CouponItem> generateOne(CouponUsedType usedType,
-      CouponEffectType effectType, DateTime expireAt, String name) async {
+  Future<CouponItem> generateOne(
+      CouponUsedType usedType,
+      CouponEffectType effectType,
+      DateTime expireAt,
+      String name,
+      String extra) async {
     final counterIndex = await _getCurrentCounterAndInc();
     final hashId = _generator.generateOne(counterIndex);
     final item = CouponItem(
-      name: name,
-      code: hashId,
-      expire: expireAt,
-      usedType: usedType,
-      effectType: effectType,
-    );
+        name: name,
+        code: hashId,
+        expire: expireAt,
+        usedType: usedType,
+        effectType: effectType,
+        extra: extra);
     await codeRef(hashId).set(item.toJson());
     return item;
   }
@@ -40,16 +44,17 @@ class CouponService with FirebaseDb implements ICouponService {
       CouponEffectType effectType,
       DateTime expireAt,
       String name,
+      String extra,
       int count) async {
     final counterIndex = await _getMultiCounterAndInc(count);
     final hashIds = _generator.generateFrom(counterIndex, count);
     final items = hashIds.map((e) => CouponItem(
-          name: name,
-          code: e,
-          expire: expireAt,
-          usedType: usedType,
-          effectType: effectType,
-        ));
+        name: name,
+        code: e,
+        expire: expireAt,
+        usedType: usedType,
+        effectType: effectType,
+        extra: extra));
     final json =
         Map.fromEntries(items.map((e) => MapEntry(e.code, e.toJson())));
     await itemsRef.update(json);
@@ -83,24 +88,42 @@ class CouponService with FirebaseDb implements ICouponService {
 }
 
 abstract class ICouponService {
-  Future<List<CouponItem>> generateMulti(CouponUsedType usedType,
-      CouponEffectType effectType, DateTime expireAt, String name, int count);
+  Future<List<CouponItem>> generateMulti(
+      CouponUsedType usedType,
+      CouponEffectType effectType,
+      DateTime expireAt,
+      String name,
+      String extra,
+      int count);
 
-  Future<CouponItem> generateOne(CouponUsedType usedType,
-      CouponEffectType effectType, DateTime expireAt, String name);
+  Future<CouponItem> generateOne(
+      CouponUsedType usedType,
+      CouponEffectType effectType,
+      DateTime expireAt,
+      String extra,
+      String name);
 }
 
 class FakeCouponService implements ICouponService {
   @override
-  Future<List<CouponItem>> generateMulti(CouponUsedType usedType,
-      CouponEffectType effectType, DateTime expireAt, String name, int count) {
+  Future<List<CouponItem>> generateMulti(
+      CouponUsedType usedType,
+      CouponEffectType effectType,
+      DateTime expireAt,
+      String name,
+      String extra,
+      int count) {
     // TODO: implement generateMulti
     throw UnimplementedError();
   }
 
   @override
-  Future<CouponItem> generateOne(CouponUsedType usedType,
-      CouponEffectType effectType, DateTime expireAt, String name) {
+  Future<CouponItem> generateOne(
+      CouponUsedType usedType,
+      CouponEffectType effectType,
+      DateTime expireAt,
+      String extra,
+      String name) {
     // TODO: implement generateOne
     throw UnimplementedError();
   }

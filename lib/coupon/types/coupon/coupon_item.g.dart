@@ -15,6 +15,7 @@ _$_CouponItem _$$_CouponItemFromJson(Map<String, dynamic> json) =>
           CouponUsedType.fromJson(json['usedType'] as Map<String, dynamic>),
       effectType:
           CouponEffectType.fromJson(json['effectType'] as Map<String, dynamic>),
+      extra: json['extra'] as String,
     );
 
 Map<String, dynamic> _$$_CouponItemToJson(_$_CouponItem instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$$_CouponItemToJson(_$_CouponItem instance) =>
       'expire': instance.expire.toIso8601String(),
       'usedType': instance.usedType,
       'effectType': instance.effectType,
+      'extra': instance.extra,
     };

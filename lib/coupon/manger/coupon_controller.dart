@@ -58,7 +58,7 @@ class CouponController extends StateController<CouponPageState> {
     }
 
     future = service.generateMulti(usedType, effectType,
-        oldInitState.expireCupon, oldInitState.name, oldInitState.countCoupon);
+        oldInitState.expireCupon, oldInitState.name, "remove-ad"  , oldInitState.countCoupon);
 
     try {
       await future;

@@ -14,7 +14,7 @@ class CouponItem with _$CouponItem {
       required String code,
       required DateTime expire,
       required CouponUsedType usedType,
-      required CouponEffectType effectType}) = _CouponItem;
+      required CouponEffectType effectType, required String extra }) = _CouponItem;
 
   factory CouponItem.fromJson(Map<String, dynamic> json) =>
       _$CouponItemFromJson(json);
