@@ -7,8 +7,13 @@ class MaterialAppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return  ProviderScope(
+      overrides: [
+        navigatorKeyProvider.overrideWithValue(navigatorKey)
+      ],
       child: MaterialApp(
+        navigatorKey: navigatorKey,
         home: const CouponPage(),
         // locale: const Locale("ar", "EF"),
         theme: ThemeData.light().copyWith(
@@ -19,3 +24,5 @@ class MaterialAppWidget extends StatelessWidget {
     );
   }
 }
+
+final navigatorKeyProvider = Provider< GlobalKey<NavigatorState>>((_) => throw UnimplementedError());

@@ -28,9 +28,8 @@ mixin _$CouponPageState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)
         init,
-    required TResult Function() error,
+    required TResult Function(Object? error, StackTrace? stackTrace) error,
     required TResult Function() loading,
-    required TResult Function() created,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,9 +44,8 @@ mixin _$CouponPageState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,9 +60,8 @@ mixin _$CouponPageState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +70,6 @@ mixin _$CouponPageState {
     required TResult Function(InitState value) init,
     required TResult Function(ErrorState value) error,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(CreatedState value) created,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,7 +77,6 @@ mixin _$CouponPageState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,7 +84,6 @@ mixin _$CouponPageState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -271,9 +265,8 @@ class _$InitState implements InitState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)
         init,
-    required TResult Function() error,
+    required TResult Function(Object? error, StackTrace? stackTrace) error,
     required TResult Function() loading,
-    required TResult Function() created,
   }) {
     return init(name, countCoupon, countUsed, day, week, expireCupon,
         couponEffectType, couponUsedTypeEnum);
@@ -292,9 +285,8 @@ class _$InitState implements InitState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
   }) {
     return init?.call(name, countCoupon, countUsed, day, week, expireCupon,
         couponEffectType, couponUsedTypeEnum);
@@ -313,9 +305,8 @@ class _$InitState implements InitState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -331,7 +322,6 @@ class _$InitState implements InitState {
     required TResult Function(InitState value) init,
     required TResult Function(ErrorState value) error,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(CreatedState value) created,
   }) {
     return init(this);
   }
@@ -342,7 +332,6 @@ class _$InitState implements InitState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
   }) {
     return init?.call(this);
   }
@@ -353,7 +342,6 @@ class _$InitState implements InitState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -394,6 +382,7 @@ abstract class _$$ErrorStateCopyWith<$Res> {
   factory _$$ErrorStateCopyWith(
           _$ErrorState value, $Res Function(_$ErrorState) then) =
       __$$ErrorStateCopyWithImpl<$Res>;
+  $Res call({Object? error, StackTrace? stackTrace});
 }
 
 /// @nodoc
@@ -406,26 +395,57 @@ class __$$ErrorStateCopyWithImpl<$Res>
 
   @override
   _$ErrorState get _value => super._value as _$ErrorState;
+
+  @override
+  $Res call({
+    Object? error = freezed,
+    Object? stackTrace = freezed,
+  }) {
+    return _then(_$ErrorState(
+      error == freezed ? _value.error : error,
+      stackTrace == freezed
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace?,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ErrorState implements ErrorState {
-  const _$ErrorState();
+  const _$ErrorState([this.error, this.stackTrace]);
+
+  @override
+  final Object? error;
+  @override
+  final StackTrace? stackTrace;
 
   @override
   String toString() {
-    return 'CouponPageState.error()';
+    return 'CouponPageState.error(error: $error, stackTrace: $stackTrace)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ErrorState);
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorState &&
+            const DeepCollectionEquality().equals(other.error, error) &&
+            const DeepCollectionEquality()
+                .equals(other.stackTrace, stackTrace));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(error),
+      const DeepCollectionEquality().hash(stackTrace));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ErrorStateCopyWith<_$ErrorState> get copyWith =>
+      __$$ErrorStateCopyWithImpl<_$ErrorState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -440,11 +460,10 @@ class _$ErrorState implements ErrorState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)
         init,
-    required TResult Function() error,
+    required TResult Function(Object? error, StackTrace? stackTrace) error,
     required TResult Function() loading,
-    required TResult Function() created,
   }) {
-    return error();
+    return error(this.error, stackTrace);
   }
 
   @override
@@ -460,11 +479,10 @@ class _$ErrorState implements ErrorState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
   }) {
-    return error?.call();
+    return error?.call(this.error, stackTrace);
   }
 
   @override
@@ -480,13 +498,12 @@ class _$ErrorState implements ErrorState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(this.error, stackTrace);
     }
     return orElse();
   }
@@ -497,7 +514,6 @@ class _$ErrorState implements ErrorState {
     required TResult Function(InitState value) init,
     required TResult Function(ErrorState value) error,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(CreatedState value) created,
   }) {
     return error(this);
   }
@@ -508,7 +524,6 @@ class _$ErrorState implements ErrorState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
   }) {
     return error?.call(this);
   }
@@ -519,7 +534,6 @@ class _$ErrorState implements ErrorState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -530,7 +544,14 @@ class _$ErrorState implements ErrorState {
 }
 
 abstract class ErrorState implements CouponPageState {
-  const factory ErrorState() = _$ErrorState;
+  const factory ErrorState(
+      [final Object? error, final StackTrace? stackTrace]) = _$ErrorState;
+
+  Object? get error => throw _privateConstructorUsedError;
+  StackTrace? get stackTrace => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$$ErrorStateCopyWith<_$ErrorState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -584,9 +605,8 @@ class _$LoadingState implements LoadingState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)
         init,
-    required TResult Function() error,
+    required TResult Function(Object? error, StackTrace? stackTrace) error,
     required TResult Function() loading,
-    required TResult Function() created,
   }) {
     return loading();
   }
@@ -604,9 +624,8 @@ class _$LoadingState implements LoadingState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
   }) {
     return loading?.call();
   }
@@ -624,9 +643,8 @@ class _$LoadingState implements LoadingState {
             CouponEffectTypeEnum couponEffectType,
             CouponUsedTypeEnum couponUsedTypeEnum)?
         init,
-    TResult Function()? error,
+    TResult Function(Object? error, StackTrace? stackTrace)? error,
     TResult Function()? loading,
-    TResult Function()? created,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -641,7 +659,6 @@ class _$LoadingState implements LoadingState {
     required TResult Function(InitState value) init,
     required TResult Function(ErrorState value) error,
     required TResult Function(LoadingState value) loading,
-    required TResult Function(CreatedState value) created,
   }) {
     return loading(this);
   }
@@ -652,7 +669,6 @@ class _$LoadingState implements LoadingState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
   }) {
     return loading?.call(this);
   }
@@ -663,7 +679,6 @@ class _$LoadingState implements LoadingState {
     TResult Function(InitState value)? init,
     TResult Function(ErrorState value)? error,
     TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -675,148 +690,4 @@ class _$LoadingState implements LoadingState {
 
 abstract class LoadingState implements CouponPageState {
   const factory LoadingState() = _$LoadingState;
-}
-
-/// @nodoc
-abstract class _$$CreatedStateCopyWith<$Res> {
-  factory _$$CreatedStateCopyWith(
-          _$CreatedState value, $Res Function(_$CreatedState) then) =
-      __$$CreatedStateCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$CreatedStateCopyWithImpl<$Res>
-    extends _$CouponPageStateCopyWithImpl<$Res>
-    implements _$$CreatedStateCopyWith<$Res> {
-  __$$CreatedStateCopyWithImpl(
-      _$CreatedState _value, $Res Function(_$CreatedState) _then)
-      : super(_value, (v) => _then(v as _$CreatedState));
-
-  @override
-  _$CreatedState get _value => super._value as _$CreatedState;
-}
-
-/// @nodoc
-
-class _$CreatedState implements CreatedState {
-  const _$CreatedState();
-
-  @override
-  String toString() {
-    return 'CouponPageState.created()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CreatedState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String name,
-            int countCoupon,
-            int countUsed,
-            int day,
-            int week,
-            DateTime expireCupon,
-            CouponEffectTypeEnum couponEffectType,
-            CouponUsedTypeEnum couponUsedTypeEnum)
-        init,
-    required TResult Function() error,
-    required TResult Function() loading,
-    required TResult Function() created,
-  }) {
-    return created();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(
-            String name,
-            int countCoupon,
-            int countUsed,
-            int day,
-            int week,
-            DateTime expireCupon,
-            CouponEffectTypeEnum couponEffectType,
-            CouponUsedTypeEnum couponUsedTypeEnum)?
-        init,
-    TResult Function()? error,
-    TResult Function()? loading,
-    TResult Function()? created,
-  }) {
-    return created?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String name,
-            int countCoupon,
-            int countUsed,
-            int day,
-            int week,
-            DateTime expireCupon,
-            CouponEffectTypeEnum couponEffectType,
-            CouponUsedTypeEnum couponUsedTypeEnum)?
-        init,
-    TResult Function()? error,
-    TResult Function()? loading,
-    TResult Function()? created,
-    required TResult orElse(),
-  }) {
-    if (created != null) {
-      return created();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(InitState value) init,
-    required TResult Function(ErrorState value) error,
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(CreatedState value) created,
-  }) {
-    return created(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(InitState value)? init,
-    TResult Function(ErrorState value)? error,
-    TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
-  }) {
-    return created?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(InitState value)? init,
-    TResult Function(ErrorState value)? error,
-    TResult Function(LoadingState value)? loading,
-    TResult Function(CreatedState value)? created,
-    required TResult orElse(),
-  }) {
-    if (created != null) {
-      return created(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CreatedState implements CouponPageState {
-  const factory CreatedState() = _$CreatedState;
 }

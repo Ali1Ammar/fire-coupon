@@ -1,20 +1,16 @@
 import 'package:coupon/coupon/manger/coupon_page_state.dart';
 import 'package:coupon/coupon/manger/logic/coupon_repo.dart';
 import 'package:coupon/coupon/manger/logic/coupon_service.dart';
+import 'package:coupon/coupon/manger/ui/create_coupon_widget.dart';
+import 'package:coupon/coupon/manger/ui/created_coupon_widget.dart';
 import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
 import 'package:coupon/coupon/types/used/coupon_used_type.dart';
+import 'package:coupon/main/material_app.dart';
+import 'package:coupon/shared/widget/dialog.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final couponControllerProvider =
-    StateNotifierProvider<CouponController, CouponPageState>((_) =>
-        CouponController(
-            _.watch(couponServiceProvider), _.watch(couponRepoProvider)));
-
-class CouponController extends StateController<CouponPageState> {
-  final ICouponService service;
-  final CouponRepo repo;
-  CouponController(this.service, this.repo)
-      : super(CouponPageState.init(
+final defualtInit = CouponPageState.init(
           name: "remove ads",
           countCoupon: 2,
           countUsed: 2,
@@ -23,14 +19,26 @@ class CouponController extends StateController<CouponPageState> {
           day: 1,
           week: 1,
           expireCupon: DateTime.now().add(const Duration(days: 1)),
-        ));
+        );
+
+final couponControllerProvider =
+    StateNotifierProvider<CouponController, CouponPageState>((_) =>
+        CouponController(_.watch(couponServiceProvider),
+            _.watch(couponRepoProvider), _.read));
+
+class CouponController extends StateController<CouponPageState> {
+  final ICouponService service;
+  final CouponRepo repo;
+  final Reader read;
+  
+  CouponController(this.service, this.repo, this.read)
+      : super(defualtInit);
 
   void changeState(InitState newState) {
     state = newState;
   }
 
   pressClick() async {
-    final Future future;
     final oldInitState = state as InitState;
     state = const CouponPageState.loading();
 
@@ -57,14 +65,21 @@ class CouponController extends StateController<CouponPageState> {
         break;
     }
 
-    future = service.generateMulti(usedType, effectType,
-        oldInitState.expireCupon, oldInitState.name, "remove-ad"  , oldInitState.countCoupon);
-
     try {
-      await future;
-      state = const CouponPageState.created();
-    } catch (e) {
-      state = const CouponPageState.error();
+      final res = await service.generateMulti(
+          usedType,
+          effectType,
+          oldInitState.expireCupon,
+          oldInitState.name,
+          "remove-ad",
+          oldInitState.countCoupon);
+          state = defualtInit;
+      read(navigatorKeyProvider).currentState!.push(
+                      MaterialPageRoute(builder: (_) => CreatedCouponPage(items:res ,) ));
+    } catch (e, s) {
+      state = CouponPageState.error(e, s);
+      showString(read(navigatorKeyProvider).currentContext!, e.toString());
+
       rethrow;
     }
   }

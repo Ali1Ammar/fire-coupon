@@ -27,9 +27,9 @@ when your coupon effect will end and his the below type
 - 3- we could create a remove ads coupon work until  2022/18/6 (untilExpire) and work for week after activeted (forDuration) and then share it with youtube video
 
 ## how to appliy the effect
-this system doesnt repsone of the effect of the coupon so if your coupon should remove the ads from the app , you should listen to the coupon stream and add if condition to stop the ads of there is a coupon.
+this system is not respone of applying the effect of the coupon so if your coupon should remove the ads from the app , you should listen to the coupon stream and add if condition to stop the ads.
 
-there are also a extra field , this is to add any extra detials about the coupon like if you have one coupon for remove ads and other for open a secret level in a game you should add this detials at this field like ,extra=remove-ad extra=secrent-level
+there are also a extra field , this is to add any extra detials about the coupon like if you have one coupon for remove ads and other for open a secret level in a game you should add this detials at this field like ,extra=remove-ad extra=secrent-level and then use it to determine the time in the UiFeatureApapter
 
 you could use this field too to store  any other things and data like userId
 

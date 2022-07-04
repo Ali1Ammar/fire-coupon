@@ -1,3 +1,4 @@
+import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
 import 'package:coupon/coupon/types/used/coupon_used_type.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,7 +18,7 @@ class CouponPageState with _$CouponPageState {
     required CouponUsedTypeEnum couponUsedTypeEnum,
     
   }) = InitState;
-  const factory CouponPageState.error() = ErrorState;
+  const factory CouponPageState.error([Object? error,StackTrace? stackTrace]) = ErrorState;
   const factory CouponPageState.loading() = LoadingState;
-    const factory CouponPageState.created() = CreatedState;
+
 }

@@ -1,4 +1,6 @@
 import 'package:coupon/coupon/manger/logic/coupon_repo.dart';
+import 'package:coupon/coupon/manger/ui/coupon_listile.dart';
+import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:flutter/material.dart';
@@ -19,19 +21,7 @@ class CouponListPage extends HookConsumerWidget {
             itemCount: datas.value.length,
             itemBuilder: (context, i) {
               final item = datas.value[i];
-              return ListTile(
-                title: Text("${item.code} | ${item.name}"),
-                subtitle: Text("${item.effectType.toArabicString()} | ${ formatter.format(item.expire)}"),
-                trailing: IconButton(
-                    onPressed: () {
-                      ref.read(couponRepoProvider).remove(item);
-                    },
-                    icon: const Icon(Icons.delete)),
-                onLongPress: () {
-                  Clipboard.setData(ClipboardData(text: item.code));
-                  showSnackBar(context, "تم النسخ");
-                },
-              );
+              return CouponListTile(item: item);
             })),
         error: ((error) => Text(error.toString())),
         loading: ((loading) => const CircularProgressIndicator()),
