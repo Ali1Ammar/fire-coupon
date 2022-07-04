@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:coupon/coupon/client/logic/exception.dart';
-import 'package:coupon/coupon/manger/logic/coupon_item.dart';
+import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:coupon/shared/logic/firebase_db.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -20,8 +20,8 @@ class CouponUseService with FirebaseDb implements ICouponUseService {
         return Transaction.abort();
       }
       try {
-        final map = value as Map;
-        // map["extra"] = ( map["extra"]  as Map).cast<String,dynamic>() ;
+        final map = (value as Map).cast<String, dynamic>();
+        map["effectType"] = (map["effectType"] as Map).cast<String, dynamic>();
         final item = CouponItem.fromJson(map);
 
         if (item.isUsed) {
@@ -44,10 +44,9 @@ class CouponUseService with FirebaseDb implements ICouponUseService {
     if (exception != null) {
       throw exception!;
     }
-    final data = res.snapshot.value;
-    final map = (data! as Map).cast<String, dynamic>();
+    final data = (res.snapshot.value! as Map).cast<String, dynamic>();
 
-    return CouponItem.fromJson(map);
+    return CouponItem.fromJson(data);
   }
 }
 

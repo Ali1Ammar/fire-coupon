@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:coupon/coupon/manger/logic/coupon_item.dart';
+import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -27,7 +27,7 @@ class CouponUseRepo {
     }
 
     int length = _items.length;
-    _items.removeWhere((element) => element.extra.isExpired());
+    _items.removeWhere((element) => element.effectType.isExpired());
 
     if (length != _items.length) {
       _reSave();

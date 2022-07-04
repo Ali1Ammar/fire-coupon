@@ -95,9 +95,9 @@ class ButtonNumbetPickerState extends State<ButtonNumbetPicker> {
       return Text(str,
           style: widget.styleText ?? Theme.of(context).textTheme.headline6);
     }
-    final extraDigit = List.generate(maxLength - str.length, (index) => " ");
-    extraDigit.insert(extraDigit.length ~/ 2, str);
-    return Text(extraDigit.join(),
+    final effectTypeDigit = List.generate(maxLength - str.length, (index) => " ");
+    effectTypeDigit.insert(effectTypeDigit.length ~/ 2, str);
+    return Text(effectTypeDigit.join(),
         style: widget.styleText ?? Theme.of(context).textTheme.headline6);
   }
 

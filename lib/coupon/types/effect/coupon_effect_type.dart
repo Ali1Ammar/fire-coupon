@@ -1,15 +1,15 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part "coupon_type.freezed.dart";
-part "coupon_type.g.dart";
+part "coupon_effect_type.freezed.dart";
+part "coupon_effect_type.g.dart";
 
 @Freezed(unionKey: "type")
-class CouponType with _$CouponType {
-  const CouponType._();
+class CouponEffectType with _$CouponEffectType {
+  const CouponEffectType._();
 
-  const factory CouponType.removeAdsUntilDate(DateTime date) =
+  const factory CouponEffectType.removeAdsUntilDate(DateTime date) =
       CouponRemoveAdUntilDate;
-  const factory CouponType.removeAdsForDuration(Duration duration) =
+  const factory CouponEffectType.removeAdsForDuration(Duration duration) =
       CouponRemoveAdForDuration;
 
   String toArabicString() {
@@ -30,20 +30,14 @@ class CouponType with _$CouponType {
     );
   }
 
-  factory CouponType.fromJson(Map<String, dynamic> json) =>
-      _$CouponTypeFromJson(json);
+  factory CouponEffectType.fromJson(Map<String, dynamic> json) =>
+      _$CouponEffectTypeFromJson(json);
 }
-
-// enum CouponTypeEnum {
-//   removeAdsUntilDate,
-//   removeAdsForDuration,
-// }
-
-enum CouponTypeEnum {
+enum CouponEffectTypeEnum {
   removeAdsUntilDate("Until Date"),
   removeAdsForDuration("For Duration");
 
   final String title;
 
-  const CouponTypeEnum(this.title);
+  const CouponEffectTypeEnum(this.title);
 }

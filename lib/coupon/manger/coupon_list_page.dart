@@ -21,7 +21,7 @@ class CouponListPage extends HookConsumerWidget {
               final item = datas.value[i];
               return ListTile(
                 title: Text("${item.code} | ${item.name}"),
-                subtitle: Text("${item.extra.toArabicString()} | ${ formatter.format(item.expire)}"),
+                subtitle: Text("${item.effectType.toArabicString()} | ${ formatter.format(item.expire)}"),
                 trailing: IconButton(
                     onPressed: () {
                       ref.read(couponRepoProvider).remove(item);

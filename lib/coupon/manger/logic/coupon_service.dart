@@ -1,41 +1,58 @@
 import 'dart:io';
 
-import 'package:coupon/coupon/manger/logic/coupon_item.dart';
-import 'package:coupon/coupon/manger/logic/coupon_type.dart';
+import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:coupon/coupon/manger/logic/generate_hashid.dart';
+import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
+import 'package:coupon/coupon/types/used/coupon_used_type.dart';
 import 'package:coupon/shared/logic/firebase_db.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final couponServiceProvider = Provider((_) {
-  if(Platform.isAndroid){
+  if (Platform.isAndroid) {
     return CouponService();
-  } 
+  }
   return FakeCouponService();
 });
 
-class CouponService  with FirebaseDb  implements ICouponService{
+class CouponService with FirebaseDb implements ICouponService {
   final _generator = GenetateHashId();
 
   @override
-  Future<CouponItem> generateOne(
-      CouponType type, DateTime expireAt, String name) async {
+  Future<CouponItem> generateOne(CouponUsedType usedType,
+      CouponEffectType effectType, DateTime expireAt, String name) async {
     final counterIndex = await _getCurrentCounterAndInc();
     final hashId = _generator.generateOne(counterIndex);
-    final item = CouponItem(hashId, expireAt, false, type, name);
+    final item = CouponItem(
+      name: name,
+      code: hashId,
+      expire: expireAt,
+      usedType: usedType,
+      effectType: effectType,
+    );
     await codeRef(hashId).set(item.toJson());
     return item;
   }
 
   @override
   Future<List<CouponItem>> generateMulti(
-      CouponType type, DateTime expireAt, int count, String name) async {
+      CouponUsedType usedType,
+      CouponEffectType effectType,
+      DateTime expireAt,
+      String name,
+      int count) async {
     final counterIndex = await _getMultiCounterAndInc(count);
     final hashIds = _generator.generateFrom(counterIndex, count);
-    final items = hashIds.map((e) => CouponItem(e, expireAt, false, type, name));
-    final json = Map.fromEntries(
-        items.map((e) => MapEntry(e.code,e.toJson() )));
-    await itemsRef.update( json );
+    final items = hashIds.map((e) => CouponItem(
+          name: name,
+          code: e,
+          expire: expireAt,
+          usedType: usedType,
+          effectType: effectType,
+        ));
+    final json =
+        Map.fromEntries(items.map((e) => MapEntry(e.code, e.toJson())));
+    await itemsRef.update(json);
     return items.toList();
   }
 
@@ -59,30 +76,31 @@ class CouponService  with FirebaseDb  implements ICouponService{
       }
       final number = value as int;
       return Transaction.success(number + numberToGet);
-    },applyLocally: false);
+    }, applyLocally: false);
     final number = (res.snapshot.value as int) - numberToGet;
     return number;
   }
 }
 
-
 abstract class ICouponService {
+  Future<List<CouponItem>> generateMulti(CouponUsedType usedType,
+      CouponEffectType effectType, DateTime expireAt, String name, int count);
 
-  Future<List<CouponItem>> generateMulti(CouponType type, DateTime expireAt, int count, String name);
-
-  Future<CouponItem> generateOne(CouponType type, DateTime expireAt, String name);
-
+  Future<CouponItem> generateOne(CouponUsedType usedType,
+      CouponEffectType effectType, DateTime expireAt, String name);
 }
 
-class FakeCouponService implements ICouponService{
+class FakeCouponService implements ICouponService {
   @override
-  Future<List<CouponItem>> generateMulti(CouponType type, DateTime expireAt, int count, String name) {
+  Future<List<CouponItem>> generateMulti(CouponUsedType usedType,
+      CouponEffectType effectType, DateTime expireAt, String name, int count) {
     // TODO: implement generateMulti
     throw UnimplementedError();
   }
 
   @override
-  Future<CouponItem> generateOne(CouponType type, DateTime expireAt, String name) {
+  Future<CouponItem> generateOne(CouponUsedType usedType,
+      CouponEffectType effectType, DateTime expireAt, String name) {
     // TODO: implement generateOne
     throw UnimplementedError();
   }

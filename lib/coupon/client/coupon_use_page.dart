@@ -49,7 +49,7 @@ class CouponUsePage extends HookConsumerWidget {
               ...usedCoupon.value!.map((item) => ListTile(
                     title: Text("${item.code} | ${item.name}"),
                     subtitle: Text(
-                        "${item.extra.toArabicString()} | ${formatter.format(item.expire)}"),
+                        "${item.effectType.toArabicString()} | ${formatter.format(item.expire)}"),
                   )),
           ],
         ));

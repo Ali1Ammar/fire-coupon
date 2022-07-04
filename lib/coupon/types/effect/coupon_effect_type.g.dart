@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'coupon_type.dart';
+part of 'coupon_effect_type.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

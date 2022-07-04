@@ -1,6 +1,6 @@
 import 'package:coupon/coupon/manger/logic/coupon_repo.dart';
 import 'package:coupon/coupon/manger/logic/coupon_service.dart';
-import 'package:coupon/coupon/manger/logic/coupon_type.dart';
+import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final couponControllerProvider = Provider(
@@ -17,7 +17,7 @@ class CouponController  {
     DateTime expireCouponDate,
   ) async {
     final res = await service.generateMulti(
-        CouponType.removeAdsUntilDate(expireCouponDate),
+        CouponEffectType.removeAdsUntilDate(expireCouponDate),
         expireCouponDate,
         count,
         name);
@@ -32,7 +32,7 @@ class CouponController  {
     int week,
   ) async {
     final res = await service.generateMulti(
-        CouponType.removeAdsForDuration(Duration(days: day + (week * 7))),
+        CouponEffectType.removeAdsForDuration(Duration(days: day + (week * 7))),
         expireCouponDate,
         count,
         name);

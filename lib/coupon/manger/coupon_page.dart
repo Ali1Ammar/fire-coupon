@@ -1,7 +1,7 @@
 import 'package:coupon/coupon/client/coupon_use_page.dart';
 import 'package:coupon/coupon/manger/coupon_controller.dart';
 import 'package:coupon/coupon/manger/coupon_list_page.dart';
-import 'package:coupon/coupon/manger/logic/coupon_type.dart';
+import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
 import 'package:coupon/shared/helper/utlis.dart';
 import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
@@ -23,7 +23,7 @@ class CouponPage extends HookConsumerWidget {
     final state = useState(const AsyncSnapshot.nothing());
     final expireCuponController =
         useState(DateTime.now().add(const Duration(days: 3)));
-    final couponTypeController = useState(CouponTypeEnum.removeAdsForDuration);
+    final CouponEffectTypeController = useState(CouponEffectTypeEnum.removeAdsForDuration);
 
     return Scaffold(
       appBar: AppBar(
@@ -50,13 +50,13 @@ class CouponPage extends HookConsumerWidget {
           Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: SinglePicker<CouponTypeEnum>(
+              child: SinglePicker<CouponEffectTypeEnum>(
                   // axis: Axis.vertical,
-                  items: CouponTypeEnum.values,
-                  currentValue: couponTypeController.value,
+                  items: CouponEffectTypeEnum.values,
+                  currentValue: CouponEffectTypeController.value,
                   getTitle: (v) => v.title,
                   onChanged: (v) {
-                    couponTypeController.value = v;
+                    CouponEffectTypeController.value = v;
                   }),
             ),
           ),
@@ -108,7 +108,7 @@ class CouponPage extends HookConsumerWidget {
               ),
             ),
           ),
-          if (couponTypeController.value == CouponTypeEnum.removeAdsForDuration)
+          if (CouponEffectTypeController.value == CouponEffectTypeEnum.removeAdsForDuration)
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -159,15 +159,15 @@ class CouponPage extends HookConsumerWidget {
                   onPressed: () async {
                     final Future future;
                     state.value = const AsyncSnapshot.waiting();
-                    switch (couponTypeController.value) {
-                      case CouponTypeEnum.removeAdsUntilDate:
+                    switch (CouponEffectTypeController.value) {
+                      case CouponEffectTypeEnum.removeAdsUntilDate:
                         future = couponController.generateRemoveAdsUntilDate(
                           nameController.text,
                           countController.value,
                           expireCuponController.value,
                         );
                         break;
-                      case CouponTypeEnum.removeAdsForDuration:
+                      case CouponEffectTypeEnum.removeAdsForDuration:
                         future = couponController.generateRemoveAdsForDuration(
                           nameController.text,
                           countController.value,

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'coupon_type.dart';
+part of 'coupon_effect_type.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-CouponType _$CouponTypeFromJson(Map<String, dynamic> json) {
+CouponEffectType _$CouponEffectTypeFromJson(Map<String, dynamic> json) {
   switch (json['type']) {
     case 'removeAdsUntilDate':
       return CouponRemoveAdUntilDate.fromJson(json);
@@ -22,13 +22,13 @@ CouponType _$CouponTypeFromJson(Map<String, dynamic> json) {
       return CouponRemoveAdForDuration.fromJson(json);
 
     default:
-      throw CheckedFromJsonException(
-          json, 'type', 'CouponType', 'Invalid union type "${json['type']}"!');
+      throw CheckedFromJsonException(json, 'type', 'CouponEffectType',
+          'Invalid union type "${json['type']}"!');
   }
 }
 
 /// @nodoc
-mixin _$CouponType {
+mixin _$CouponEffectType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(DateTime date) removeAdsUntilDate,
@@ -72,19 +72,20 @@ mixin _$CouponType {
 }
 
 /// @nodoc
-abstract class $CouponTypeCopyWith<$Res> {
-  factory $CouponTypeCopyWith(
-          CouponType value, $Res Function(CouponType) then) =
-      _$CouponTypeCopyWithImpl<$Res>;
+abstract class $CouponEffectTypeCopyWith<$Res> {
+  factory $CouponEffectTypeCopyWith(
+          CouponEffectType value, $Res Function(CouponEffectType) then) =
+      _$CouponEffectTypeCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$CouponTypeCopyWithImpl<$Res> implements $CouponTypeCopyWith<$Res> {
-  _$CouponTypeCopyWithImpl(this._value, this._then);
+class _$CouponEffectTypeCopyWithImpl<$Res>
+    implements $CouponEffectTypeCopyWith<$Res> {
+  _$CouponEffectTypeCopyWithImpl(this._value, this._then);
 
-  final CouponType _value;
+  final CouponEffectType _value;
   // ignore: unused_field
-  final $Res Function(CouponType) _then;
+  final $Res Function(CouponEffectType) _then;
 }
 
 /// @nodoc
@@ -97,7 +98,7 @@ abstract class _$$CouponRemoveAdUntilDateCopyWith<$Res> {
 
 /// @nodoc
 class __$$CouponRemoveAdUntilDateCopyWithImpl<$Res>
-    extends _$CouponTypeCopyWithImpl<$Res>
+    extends _$CouponEffectTypeCopyWithImpl<$Res>
     implements _$$CouponRemoveAdUntilDateCopyWith<$Res> {
   __$$CouponRemoveAdUntilDateCopyWithImpl(_$CouponRemoveAdUntilDate _value,
       $Res Function(_$CouponRemoveAdUntilDate) _then)
@@ -138,7 +139,7 @@ class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
 
   @override
   String toString() {
-    return 'CouponType.removeAdsUntilDate(date: $date)';
+    return 'CouponEffectType.removeAdsUntilDate(date: $date)';
   }
 
   @override
@@ -229,7 +230,7 @@ class _$CouponRemoveAdUntilDate extends CouponRemoveAdUntilDate {
   }
 }
 
-abstract class CouponRemoveAdUntilDate extends CouponType {
+abstract class CouponRemoveAdUntilDate extends CouponEffectType {
   const factory CouponRemoveAdUntilDate(final DateTime date) =
       _$CouponRemoveAdUntilDate;
   const CouponRemoveAdUntilDate._() : super._();
@@ -254,7 +255,7 @@ abstract class _$$CouponRemoveAdForDurationCopyWith<$Res> {
 
 /// @nodoc
 class __$$CouponRemoveAdForDurationCopyWithImpl<$Res>
-    extends _$CouponTypeCopyWithImpl<$Res>
+    extends _$CouponEffectTypeCopyWithImpl<$Res>
     implements _$$CouponRemoveAdForDurationCopyWith<$Res> {
   __$$CouponRemoveAdForDurationCopyWithImpl(_$CouponRemoveAdForDuration _value,
       $Res Function(_$CouponRemoveAdForDuration) _then)
@@ -295,7 +296,7 @@ class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
 
   @override
   String toString() {
-    return 'CouponType.removeAdsForDuration(duration: $duration)';
+    return 'CouponEffectType.removeAdsForDuration(duration: $duration)';
   }
 
   @override
@@ -386,7 +387,7 @@ class _$CouponRemoveAdForDuration extends CouponRemoveAdForDuration {
   }
 }
 
-abstract class CouponRemoveAdForDuration extends CouponType {
+abstract class CouponRemoveAdForDuration extends CouponEffectType {
   const factory CouponRemoveAdForDuration(final Duration duration) =
       _$CouponRemoveAdForDuration;
   const CouponRemoveAdForDuration._() : super._();
