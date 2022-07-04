@@ -168,13 +168,14 @@ class __$$_CouponItemCopyWithImpl<$Res> extends _$CouponItemCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CouponItem implements _CouponItem {
+class _$_CouponItem extends _CouponItem {
   const _$_CouponItem(
       {required this.name,
       required this.code,
       required this.expire,
       required this.usedType,
-      required this.effectType});
+      required this.effectType})
+      : super._();
 
   factory _$_CouponItem.fromJson(Map<String, dynamic> json) =>
       _$$_CouponItemFromJson(json);
@@ -229,13 +230,14 @@ class _$_CouponItem implements _CouponItem {
   }
 }
 
-abstract class _CouponItem implements CouponItem {
+abstract class _CouponItem extends CouponItem {
   const factory _CouponItem(
       {required final String name,
       required final String code,
       required final DateTime expire,
       required final CouponUsedType usedType,
       required final CouponEffectType effectType}) = _$_CouponItem;
+  const _CouponItem._() : super._();
 
   factory _CouponItem.fromJson(Map<String, dynamic> json) =
       _$_CouponItem.fromJson;
