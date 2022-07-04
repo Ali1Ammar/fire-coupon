@@ -32,3 +32,9 @@ this system doesnt repsone of the effect of the coupon so if your coupon should 
 there are also a extra field , this is to add any extra detials about the coupon like if you have one coupon for remove ads and other for open a secret level in a game you should add this detials at this field like ,extra=remove-ad extra=secrent-level
 
 you could use this field too to store  any other things and data like userId
+
+## Integrate to UI
+to easily Integrate the coupons to your ui you should use the following 
+- 1- couponUseStreamProvider: to listen to list of active coupon
+- 2- UiFeatureApapter: take a list of coupon and convert it to simple field that could be used at the ui ( you must edit this file as you need)
+- 3- uiFeatureApapterStreamProvider: to listen to any change at UiFeatureApapter
