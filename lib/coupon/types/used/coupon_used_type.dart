@@ -13,3 +13,14 @@ class CouponUsedType with _$CouponUsedType {
 
   factory CouponUsedType.fromJson(Map<String, dynamic> json) => _$CouponUsedTypeFromJson(json);
 }
+
+
+enum CouponUsedTypeEnum {
+  oneTime("One Time"),
+  untilExpire("Until Expire"),
+  countTime("Count Time");
+
+  final String title;
+
+  const CouponUsedTypeEnum(this.title);
+}

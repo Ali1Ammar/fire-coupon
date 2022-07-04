@@ -2,12 +2,11 @@ import 'package:coupon/coupon/client/coupon_use_page.dart';
 import 'package:coupon/coupon/manger/coupon_controller.dart';
 import 'package:coupon/coupon/manger/coupon_list_page.dart';
 import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
+import 'package:coupon/coupon/types/used/coupon_used_type.dart';
 import 'package:coupon/shared/helper/utlis.dart';
-import 'package:coupon/shared/widget/dialog.dart';
 import 'package:coupon/shared/widget/number_picker.dart';
 import 'package:coupon/shared/widget/row_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CouponPage extends HookConsumerWidget {
@@ -15,183 +14,179 @@ class CouponPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final couponController = ref.watch(couponControllerProvider);
-    final nameController = useTextEditingController(text: "remove ads");
-    final countController = useState(1);
-    final dayController = useState(1);
-    final weekController = useState(0);
-    final state = useState(const AsyncSnapshot.nothing());
-    final expireCuponController =
-        useState(DateTime.now().add(const Duration(days: 3)));
-    final CouponEffectTypeController = useState(CouponEffectTypeEnum.removeAdsForDuration);
+    final couponController = ref.watch(couponControllerProvider.notifier);
+    final state = ref.watch(couponControllerProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("genrate coupon"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const CouponListPage()));
-              },
-              icon: const Icon(Icons.list)),
-          IconButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => const CouponUsePage()));
-              },
-              icon: const Icon(Icons.play_arrow))
-        ],
-      ),
-      body: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SinglePicker<CouponEffectTypeEnum>(
-                  // axis: Axis.vertical,
-                  items: CouponEffectTypeEnum.values,
-                  currentValue: CouponEffectTypeController.value,
-                  getTitle: (v) => v.title,
-                  onChanged: (v) {
-                    CouponEffectTypeController.value = v;
-                  }),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: nameController,
-                decoration: const InputDecoration(labelText: "name"),
-              ),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+        appBar: AppBar(
+          title: const Text("genrate coupon"),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => const CouponListPage()));
+                },
+                icon: const Icon(Icons.list)),
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const CouponUsePage()));
+                },
+                icon: const Icon(Icons.play_arrow))
+          ],
+        ),
+        body: state.map(
+            loading: (_) => const CircularProgressIndicator(),
+            error: (e) => Text(e.toString()),
+            created: (d) => const Text("done"),
+            init: (data) {
+              return SingleChildScrollView(
+                  child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Count to generate: "),
-                  ButtonNumbetPicker(
-                    minValue: 1,
-                    maxValue: 700,
-                    initialValue: 1,
-                    iconSize: 12,
-                    raduis: 25,
-                    onChanged: (val) {
-                      countController.value = val.toInt();
-                    },
+                  ourCard(
+                    child: SinglePicker<CouponEffectTypeEnum>(
+                        // axis: Axis.vertical,
+                        items: CouponEffectTypeEnum.values,
+                        currentValue: data.couponEffectType,
+                        getTitle: (v) => v.title,
+                        onChanged: (v) {
+                          couponController
+                              .changeState(data.copyWith(couponEffectType: v));
+                        }),
                   ),
-                ],
-              ),
-            ),
-          ),
-          Card(
-            child: Center(
-              child: Column(
-                children: [
-                  const Text("expire date"),
-                  OutlinedButton(
-                      onPressed: () {
-                        showDatePicker(
-                            context: context,
-                            initialDate: expireCuponController.value,
-                            firstDate: DateTime.now(),
-                            fieldLabelText: "enter date",
-                            lastDate: DateTime.now().add(const Duration(days: 360)));
+                  ourCard(
+                    child: SinglePicker<CouponUsedTypeEnum>(
+                        // axis: Axis.vertical,
+                        items: CouponUsedTypeEnum.values,
+                        currentValue: data.couponUsedTypeEnum,
+                        getTitle: (v) => v.title,
+                        onChanged: (v) {
+                          couponController.changeState(
+                              data.copyWith(couponUsedTypeEnum: v));
+                        }),
+                  ),
+                  ourCard(
+                    child: TextField(
+                      onChanged: (v) {
+                        couponController.changeState(
+                            data.copyWith(name: v));
                       },
-                      child: Text(formatter.format(expireCuponController.value))),
-                ],
-              ),
-            ),
-          ),
-          if (CouponEffectTypeController.value == CouponEffectTypeEnum.removeAdsForDuration)
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    const Text("duration"),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      decoration: const InputDecoration(labelText: "name"),
+                    ),
+                  ),
+                  ourCard(
+                    child: Row(
+                      children: [
+                        const Text("Number of Coupon: "),
+                        ButtonNumbetPicker(
+                          minValue: 1,
+                          maxValue: 700,
+                          initialValue: 1,
+                          iconSize: 12,
+                          raduis: 25,
+                          onChanged: (val) {
+                            couponController.changeState(
+                                data.copyWith(countCoupon: val.toInt()));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  ourCard(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const Text("expire date"),
+                          OutlinedButton(
+                              onPressed: () {
+                                showDatePicker(
+                                    context: context,
+                                    initialDate: data.expireCupon,
+                                    firstDate: DateTime.now(),
+                                    fieldLabelText: "enter date",
+                                    lastDate: DateTime.now()
+                                        .add(const Duration(days: 360)));
+                              },
+                              child: Text(formatter.format(data.expireCupon))),
+                        ],
+                      ),
+                    ),
+                  ),
+                  if (data.couponEffectType == CouponEffectTypeEnum.forDuration)
+                    ourCard(
+                      child: Column(
+                        children: [
+                          const Text("duration"),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                const Text("days: "),
+                                ButtonNumbetPicker(
+                                  minValue: 0,
+                                  maxValue: 7,
+                                  initialValue: 0,
+                                  onChanged: (val) {
+                                    couponController.changeState(
+                                        data.copyWith(day: val.toInt()));
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                const Text("weeks: "),
+                                ButtonNumbetPicker(
+                                  minValue: 0,
+                                  maxValue: 1000,
+                                  initialValue: 0,
+                                  onChanged: (val) {
+                                    couponController.changeState(
+                                        data.copyWith(week: val.toInt()));
+                                  },
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  if (data.couponUsedTypeEnum == CouponUsedTypeEnum.countTime)
+                    ourCard(
                       child: Row(
                         children: [
-                          const Text("days: "),
+                          const Text("Number of Used: "),
                           ButtonNumbetPicker(
-                            minValue: 0,
-                            maxValue: 7,
-                            initialValue: 0,
+                            minValue: 2,
+                            maxValue: 700,
+                            initialValue: 1,
+                            iconSize: 12,
+                            raduis: 25,
                             onChanged: (val) {
-                              dayController.value = val.toInt();
+                              couponController.changeState(
+                                  data.copyWith(countUsed: val.toInt()));
                             },
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          const Text("weeks: "),
-                          ButtonNumbetPicker(
-                            minValue: 0,
-                            maxValue: 1000,
-                            initialValue: 0,
-                            onChanged: (val) {
-                              weekController.value = val.toInt();
-                            },
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          if (state.value.connectionState == ConnectionState.waiting)
-            const CircularProgressIndicator()
-          else
-            Center(
-              child: ElevatedButton(
-                  onPressed: () async {
-                    final Future future;
-                    state.value = const AsyncSnapshot.waiting();
-                    switch (CouponEffectTypeController.value) {
-                      case CouponEffectTypeEnum.removeAdsUntilDate:
-                        future = couponController.generateRemoveAdsUntilDate(
-                          nameController.text,
-                          countController.value,
-                          expireCuponController.value,
-                        );
-                        break;
-                      case CouponEffectTypeEnum.removeAdsForDuration:
-                        future = couponController.generateRemoveAdsForDuration(
-                          nameController.text,
-                          countController.value,
-                          expireCuponController.value,
-                          dayController.value,
-                          weekController.value,
-                        );
-                        break;
-                    }
-                    try {
-                      await future;
-                      state.value = const AsyncSnapshot.withData(
-                          ConnectionState.done, null);
-                    } catch (e, s) {
-                      showString(context, e.toString());
-                      state.value =
-                          AsyncSnapshot.withError(ConnectionState.done, e, s);
-                      rethrow;
-                    }
-                  },
-                  child: const Text("create")),
-            )
-        ],
-      )),
-    );
+                  Center(
+                    child: ElevatedButton(
+                        onPressed: () async {
+                        couponController.pressClick();
+                        },
+                        child: const Text("create")),
+                  )
+                ],
+              ));
+            }));
   }
+
+  Widget ourCard({required Widget child}) => Card(
+        child: Padding(padding: const EdgeInsets.all(8), child: child),
+      );
 }
