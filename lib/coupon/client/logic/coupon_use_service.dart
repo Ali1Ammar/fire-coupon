@@ -24,7 +24,7 @@ class CouponUseService with FirebaseDb implements ICouponUseService {
         map["effectType"] = (map["effectType"] as Map).cast<String, dynamic>();
         final item = CouponItem.fromJson(map);
 
-        if (item.isUsed) {
+        if (item.couldBeUsed()) {
           exception = UsedCouponException();
           return Transaction.abort();
         }
