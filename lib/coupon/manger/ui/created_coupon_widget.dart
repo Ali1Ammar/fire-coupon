@@ -18,6 +18,16 @@ class CreatedCouponPage extends StatelessWidget {
               builder.writeln(item.code);
             }
             Clipboard.setData(ClipboardData(text: builder.toString()));
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text("copied"),
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: const Text("ok"))
+                  ],
+                ));
           }, icon: const Icon(Icons.copy_all) )
         ],
       ) ,

@@ -104,7 +104,7 @@ class CreateCouponWidget extends StatelessWidget {
                       ButtonNumbetPicker(
                         minValue: 0,
                         maxValue: 7,
-                        initialValue: 0,
+                        initialValue: data.day.toDouble() ,
                         onChanged: (val) {
                           couponController
                               .changeState(data.copyWith(day: val.toInt()));
@@ -121,7 +121,7 @@ class CreateCouponWidget extends StatelessWidget {
                       ButtonNumbetPicker(
                         minValue: 0,
                         maxValue: 1000,
-                        initialValue: 0,
+                        initialValue: data.week.toDouble() ,
                         onChanged: (val) {
                           couponController
                               .changeState(data.copyWith(week: val.toInt()));

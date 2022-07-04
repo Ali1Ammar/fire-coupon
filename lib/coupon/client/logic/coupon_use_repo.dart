@@ -23,7 +23,7 @@ class CouponUseRepo {
 
     if (res != null) {
       _items =
-          (jsonDecode(res) as List).map((e) => CouponItem.fromJson(e)).toList();
+          (jsonDecode(res) as List).map((e) => CouponItem.fromJson((e as Map).cast<String, dynamic>() )).toList();
     }
 
     int length = _items.length;

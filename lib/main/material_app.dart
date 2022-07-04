@@ -7,22 +7,23 @@ class MaterialAppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return  ProviderScope(
-      overrides: [
-        navigatorKeyProvider.overrideWithValue(navigatorKey)
-      ],
-      child: MaterialApp(
-        navigatorKey: navigatorKey,
-        home: const CouponPage(),
-        // locale: const Locale("ar", "EF"),
-        theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: const Color.fromARGB(255, 243, 242, 245) 
-        ) ,
-        // builder: (_,child)=> Directionality(textDirection: TextDirection.rtl, child: child!) ,
+     
+      child: Builder(
+        builder: (context) {
+          return MaterialApp(
+            navigatorKey: ProviderScope.containerOf(context).read(navigatorKeyProvider) ,
+            home: const CouponPage(),
+            // locale: const Locale("ar", "EF"),
+            theme: ThemeData.light().copyWith(
+              scaffoldBackgroundColor: const Color.fromARGB(255, 243, 242, 245) 
+            ) ,
+            // builder: (_,child)=> Directionality(textDirection: TextDirection.rtl, child: child!) ,
+          );
+        }
       ),
     );
   }
 }
 
-final navigatorKeyProvider = Provider< GlobalKey<NavigatorState>>((_) => throw UnimplementedError());
+final navigatorKeyProvider = Provider< GlobalKey<NavigatorState>>((_) => GlobalKey<NavigatorState>());

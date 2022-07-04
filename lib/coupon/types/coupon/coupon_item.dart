@@ -16,7 +16,7 @@ class CouponItem with _$CouponItem {
       required CouponUsedType usedType,
       required CouponEffectType effectType, required String extra }) = _CouponItem;
 
-  factory CouponItem.fromJson(Map<String, dynamic> json) =>
+  factory CouponItem.fromJson(Map<String,dynamic> json) =>
       _$CouponItemFromJson(json);
 
   bool couldBeUsed() {

@@ -33,7 +33,16 @@ class CouponPage extends HookConsumerWidget {
         ),
         body: state.map(
             loading: (_) => const Center(child: CircularProgressIndicator()),
-            error: (e) => Text(e.toString()),
+            error: (e) => Column(
+                  children: [
+                    const Text("there a error"),
+                    OutlinedButton(
+                        onPressed: () {
+                          ref.refresh(couponControllerProvider);
+                        },
+                        child: const Text("refresh"))
+                  ],
+                ),
             init: (data) {
               return CreateCouponWidget(
                   couponController: couponController, data: data);

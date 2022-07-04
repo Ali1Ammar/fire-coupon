@@ -22,7 +22,7 @@ class CouponRepo {
     final res = sharedPreferences.getString("CouponItems");
     if (res != null){
       _items =
-          (jsonDecode(res) as List).map((e) => CouponItem.fromJson(e)).toList();
+          (jsonDecode(res) as List).map((e) => CouponItem.fromJson(e  )).toList();
     }
 
     _streamController.add(_items);

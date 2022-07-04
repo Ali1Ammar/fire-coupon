@@ -1,7 +1,6 @@
 import 'package:coupon/coupon/manger/coupon_page_state.dart';
 import 'package:coupon/coupon/manger/logic/coupon_repo.dart';
 import 'package:coupon/coupon/manger/logic/coupon_service.dart';
-import 'package:coupon/coupon/manger/ui/create_coupon_widget.dart';
 import 'package:coupon/coupon/manger/ui/created_coupon_widget.dart';
 import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
 import 'package:coupon/coupon/types/used/coupon_used_type.dart';

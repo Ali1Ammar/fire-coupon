@@ -12,6 +12,14 @@ class CouponUsedType with _$CouponUsedType {
   const factory CouponUsedType.countTime(int count,List<String> ids) = CountTimeCoupon;
 
   factory CouponUsedType.fromJson(Map<String, dynamic> json) => _$CouponUsedTypeFromJson(json);
+
+   CouponUsedType afterUsed()=>
+    map(
+      oneTime: (v) => v.copyWith(isUsed: true),
+      untilExpire: (v) => v,
+      countTime: (v) => v.copyWith(ids: v.ids..add("")),//TODO add real id
+    );
+  
 }
 
 

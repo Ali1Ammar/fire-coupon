@@ -23,7 +23,7 @@ Map<String, dynamic> _$$_CouponItemToJson(_$_CouponItem instance) =>
       'name': instance.name,
       'code': instance.code,
       'expire': instance.expire.toIso8601String(),
-      'usedType': instance.usedType,
-      'effectType': instance.effectType,
+      'usedType': instance.usedType.toJson(),
+      'effectType': instance.effectType.toJson(),
       'extra': instance.extra,
     };
