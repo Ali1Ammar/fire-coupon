@@ -7,7 +7,7 @@ part "coupon_used_type.g.dart";
 class CouponUsedType with _$CouponUsedType {
   const CouponUsedType._();
 
-  const factory CouponUsedType.onTime(bool isUsed) = OnTimeCoupon;
+  const factory CouponUsedType.oneTime(bool isUsed) = OneTimeCoupon;
   const factory CouponUsedType.untilExpire() = UntilExpireCoupon;
   const factory CouponUsedType.countTime(int count,List<String> ids) = CountTimeCoupon;
 

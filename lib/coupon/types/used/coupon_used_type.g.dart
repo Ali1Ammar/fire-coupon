@@ -6,13 +6,13 @@ part of 'coupon_used_type.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$OnTimeCoupon _$$OnTimeCouponFromJson(Map<String, dynamic> json) =>
-    _$OnTimeCoupon(
+_$OneTimeCoupon _$$OneTimeCouponFromJson(Map<String, dynamic> json) =>
+    _$OneTimeCoupon(
       json['isUsed'] as bool,
       $type: json['type'] as String?,
     );
 
-Map<String, dynamic> _$$OnTimeCouponToJson(_$OnTimeCoupon instance) =>
+Map<String, dynamic> _$$OneTimeCouponToJson(_$OneTimeCoupon instance) =>
     <String, dynamic>{
       'isUsed': instance.isUsed,
       'type': instance.$type,
