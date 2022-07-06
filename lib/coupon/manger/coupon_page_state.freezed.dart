@@ -362,16 +362,14 @@ abstract class InitState implements CouponPageState {
       required final CouponEffectTypeEnum couponEffectType,
       required final CouponUsedTypeEnum couponUsedTypeEnum}) = _$InitState;
 
-  String get name => throw _privateConstructorUsedError;
-  int get countCoupon => throw _privateConstructorUsedError;
-  int get countUsed => throw _privateConstructorUsedError;
-  int get day => throw _privateConstructorUsedError;
-  int get week => throw _privateConstructorUsedError;
-  DateTime get expireCupon => throw _privateConstructorUsedError;
-  CouponEffectTypeEnum get couponEffectType =>
-      throw _privateConstructorUsedError;
-  CouponUsedTypeEnum get couponUsedTypeEnum =>
-      throw _privateConstructorUsedError;
+  String get name;
+  int get countCoupon;
+  int get countUsed;
+  int get day;
+  int get week;
+  DateTime get expireCupon;
+  CouponEffectTypeEnum get couponEffectType;
+  CouponUsedTypeEnum get couponUsedTypeEnum;
   @JsonKey(ignore: true)
   _$$InitStateCopyWith<_$InitState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -547,8 +545,8 @@ abstract class ErrorState implements CouponPageState {
   const factory ErrorState(
       [final Object? error, final StackTrace? stackTrace]) = _$ErrorState;
 
-  Object? get error => throw _privateConstructorUsedError;
-  StackTrace? get stackTrace => throw _privateConstructorUsedError;
+  Object? get error;
+  StackTrace? get stackTrace;
   @JsonKey(ignore: true)
   _$$ErrorStateCopyWith<_$ErrorState> get copyWith =>
       throw _privateConstructorUsedError;

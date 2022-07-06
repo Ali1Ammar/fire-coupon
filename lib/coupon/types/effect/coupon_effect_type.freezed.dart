@@ -232,7 +232,7 @@ abstract class UntilDate extends CouponEffectType {
 
   factory UntilDate.fromJson(Map<String, dynamic> json) = _$UntilDate.fromJson;
 
-  DateTime get date => throw _privateConstructorUsedError;
+  DateTime get date;
   @JsonKey(ignore: true)
   _$$UntilDateCopyWith<_$UntilDate> get copyWith =>
       throw _privateConstructorUsedError;
@@ -384,7 +384,7 @@ abstract class ForDuration extends CouponEffectType {
   factory ForDuration.fromJson(Map<String, dynamic> json) =
       _$ForDuration.fromJson;
 
-  Duration get duration => throw _privateConstructorUsedError;
+  Duration get duration;
   @JsonKey(ignore: true)
   _$$ForDurationCopyWith<_$ForDuration> get copyWith =>
       throw _privateConstructorUsedError;

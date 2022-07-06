@@ -247,7 +247,7 @@ abstract class OneTimeCoupon extends CouponUsedType {
   factory OneTimeCoupon.fromJson(Map<String, dynamic> json) =
       _$OneTimeCoupon.fromJson;
 
-  bool get isUsed => throw _privateConstructorUsedError;
+  bool get isUsed;
   @JsonKey(ignore: true)
   _$$OneTimeCouponCopyWith<_$OneTimeCoupon> get copyWith =>
       throw _privateConstructorUsedError;
@@ -551,8 +551,8 @@ abstract class CountTimeCoupon extends CouponUsedType {
   factory CountTimeCoupon.fromJson(Map<String, dynamic> json) =
       _$CountTimeCoupon.fromJson;
 
-  int get count => throw _privateConstructorUsedError;
-  List<String> get ids => throw _privateConstructorUsedError;
+  int get count;
+  List<String> get ids;
   @JsonKey(ignore: true)
   _$$CountTimeCouponCopyWith<_$CountTimeCoupon> get copyWith =>
       throw _privateConstructorUsedError;

@@ -262,17 +262,17 @@ abstract class _CouponItem extends CouponItem {
       _$_CouponItem.fromJson;
 
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get code => throw _privateConstructorUsedError;
+  String get code;
   @override
-  DateTime get expire => throw _privateConstructorUsedError;
+  DateTime get expire;
   @override
-  CouponUsedType get usedType => throw _privateConstructorUsedError;
+  CouponUsedType get usedType;
   @override
-  CouponEffectType get effectType => throw _privateConstructorUsedError;
+  CouponEffectType get effectType;
   @override
-  String get extra => throw _privateConstructorUsedError;
+  String get extra;
   @override
   @JsonKey(ignore: true)
   _$$_CouponItemCopyWith<_$_CouponItem> get copyWith =>

@@ -3,7 +3,6 @@ import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final uiFeatureApapterStreamProvider = StreamProvider((ref) => ref.watch(couponUseStreamProvider.stream).map((event) => UiFeatureApapter(event)) );
-
 class UiFeatureApapter {
   UiFeatureApapter(List<CouponItem> items) {
     //implement a code to convert List<CouponItem> to a easy to use bool or other value that could be acces from the ui easily
