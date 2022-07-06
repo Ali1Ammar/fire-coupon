@@ -2,7 +2,9 @@ import 'package:coupon/coupon/client/logic/coupon_use_repo.dart';
 import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final uiFeatureApapterStreamProvider = StreamProvider((ref) => ref.watch(couponUseStreamProvider.stream).map((event) => UiFeatureApapter(event)) );
+final uiFeatureApapterProvider =
+    StateProvider((ref) => UiFeatureApapter(ref.watch(couponUseStateProvider)));
+
 class UiFeatureApapter {
   UiFeatureApapter(List<CouponItem> items) {
     //implement a code to convert List<CouponItem> to a easy to use bool or other value that could be acces from the ui easily
@@ -14,7 +16,7 @@ class UiFeatureApapter {
     //     isAdEnable = false;
     //   } , openSecretLevel:(d){
     //     isSecretLevelEnable = true;
-      
+
     //   } );
     // }
     if (items.isNotEmpty) isAdEnable = false;

@@ -15,8 +15,9 @@ class CouponUsePage extends HookConsumerWidget {
     final codeController = useTextEditingController();
     final state = useState(const AsyncSnapshot.nothing());
     final couponUseController = ref.read(couponUseControllerProvider);
-    final usedCoupon = ref.watch(couponUseStreamProvider);
-    final enableUI = ref.watch(uiFeatureApapterStreamProvider).value;
+    final usedCoupon = ref.watch(couponUseStateProvider);
+    final enableUI = ref.watch(uiFeatureApapterProvider);
+    // ref.watch(uiFeatureApapterStreamProvider).
     return Scaffold(
         appBar: AppBar(
           title: const Text('Coupon Use'),
@@ -29,7 +30,7 @@ class CouponUsePage extends HookConsumerWidget {
               ),
               controller: codeController,
             ),
-            if(enableUI?.isAdEnable??false) const Card(child: Text("This is a fake ads")),
+            if(enableUI.isAdEnable) const Card(child: Text("This is a fake ads")),
             ElevatedButton(
                 onPressed: () async {
                   try {
@@ -45,8 +46,7 @@ class CouponUsePage extends HookConsumerWidget {
                   }
                 },
                 child: const Text('Use Coupon')),
-            if (usedCoupon.value != null)
-              ...usedCoupon.value!.map((item) => ListTile(
+              ...usedCoupon.map((item) => ListTile(
                     title: Text("${item.code} | ${item.name}"),
                     subtitle: Text(
                         "${item.effectType.toArabicString()} | ${formatter.format(item.expire)}"),
