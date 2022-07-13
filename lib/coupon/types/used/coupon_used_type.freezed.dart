@@ -33,21 +33,21 @@ CouponUsedType _$CouponUsedTypeFromJson(Map<String, dynamic> json) {
 mixin _$CouponUsedType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isUsed) oneTime,
+    required TResult Function() oneTime,
     required TResult Function() untilExpire,
     required TResult Function(int count, List<String> ids) countTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
     required TResult orElse(),
@@ -100,7 +100,6 @@ abstract class _$$OneTimeCouponCopyWith<$Res> {
   factory _$$OneTimeCouponCopyWith(
           _$OneTimeCoupon value, $Res Function(_$OneTimeCoupon) then) =
       __$$OneTimeCouponCopyWithImpl<$Res>;
-  $Res call({bool isUsed});
 }
 
 /// @nodoc
@@ -113,89 +112,66 @@ class __$$OneTimeCouponCopyWithImpl<$Res>
 
   @override
   _$OneTimeCoupon get _value => super._value as _$OneTimeCoupon;
-
-  @override
-  $Res call({
-    Object? isUsed = freezed,
-  }) {
-    return _then(_$OneTimeCoupon(
-      isUsed == freezed
-          ? _value.isUsed
-          : isUsed // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$OneTimeCoupon extends OneTimeCoupon {
-  const _$OneTimeCoupon(this.isUsed, {final String? $type})
+  const _$OneTimeCoupon({final String? $type})
       : $type = $type ?? 'oneTime',
         super._();
 
   factory _$OneTimeCoupon.fromJson(Map<String, dynamic> json) =>
       _$$OneTimeCouponFromJson(json);
 
-  @override
-  final bool isUsed;
-
   @JsonKey(name: 'type')
   final String $type;
 
   @override
   String toString() {
-    return 'CouponUsedType.oneTime(isUsed: $isUsed)';
+    return 'CouponUsedType.oneTime()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$OneTimeCoupon &&
-            const DeepCollectionEquality().equals(other.isUsed, isUsed));
+        (other.runtimeType == runtimeType && other is _$OneTimeCoupon);
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(isUsed));
-
-  @JsonKey(ignore: true)
-  @override
-  _$$OneTimeCouponCopyWith<_$OneTimeCoupon> get copyWith =>
-      __$$OneTimeCouponCopyWithImpl<_$OneTimeCoupon>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isUsed) oneTime,
+    required TResult Function() oneTime,
     required TResult Function() untilExpire,
     required TResult Function(int count, List<String> ids) countTime,
   }) {
-    return oneTime(isUsed);
+    return oneTime();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
   }) {
-    return oneTime?.call(isUsed);
+    return oneTime?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
     required TResult orElse(),
   }) {
     if (oneTime != null) {
-      return oneTime(isUsed);
+      return oneTime();
     }
     return orElse();
   }
@@ -241,16 +217,11 @@ class _$OneTimeCoupon extends OneTimeCoupon {
 }
 
 abstract class OneTimeCoupon extends CouponUsedType {
-  const factory OneTimeCoupon(final bool isUsed) = _$OneTimeCoupon;
+  const factory OneTimeCoupon() = _$OneTimeCoupon;
   const OneTimeCoupon._() : super._();
 
   factory OneTimeCoupon.fromJson(Map<String, dynamic> json) =
       _$OneTimeCoupon.fromJson;
-
-  bool get isUsed;
-  @JsonKey(ignore: true)
-  _$$OneTimeCouponCopyWith<_$OneTimeCoupon> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -303,7 +274,7 @@ class _$UntilExpireCoupon extends UntilExpireCoupon {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isUsed) oneTime,
+    required TResult Function() oneTime,
     required TResult Function() untilExpire,
     required TResult Function(int count, List<String> ids) countTime,
   }) {
@@ -313,7 +284,7 @@ class _$UntilExpireCoupon extends UntilExpireCoupon {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
   }) {
@@ -323,7 +294,7 @@ class _$UntilExpireCoupon extends UntilExpireCoupon {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
     required TResult orElse(),
@@ -472,7 +443,7 @@ class _$CountTimeCoupon extends CountTimeCoupon {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isUsed) oneTime,
+    required TResult Function() oneTime,
     required TResult Function() untilExpire,
     required TResult Function(int count, List<String> ids) countTime,
   }) {
@@ -482,7 +453,7 @@ class _$CountTimeCoupon extends CountTimeCoupon {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
   }) {
@@ -492,7 +463,7 @@ class _$CountTimeCoupon extends CountTimeCoupon {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isUsed)? oneTime,
+    TResult Function()? oneTime,
     TResult Function()? untilExpire,
     TResult Function(int count, List<String> ids)? countTime,
     required TResult orElse(),

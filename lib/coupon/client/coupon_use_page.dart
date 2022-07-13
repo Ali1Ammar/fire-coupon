@@ -42,7 +42,7 @@ class CouponUsePage extends HookConsumerWidget {
                     showString(context, e.toString());
                     state.value =
                         AsyncSnapshot.withError(ConnectionState.done, e, s);
-                    rethrow;
+                    // rethrow;
                   }
                 },
                 child: const Text('Use Coupon')),

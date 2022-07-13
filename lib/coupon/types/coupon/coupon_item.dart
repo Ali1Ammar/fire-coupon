@@ -14,19 +14,24 @@ class CouponItem with _$CouponItem {
       required String code,
       required DateTime expire,
       required CouponUsedType usedType,
-      required CouponEffectType effectType, required String extra }) = _CouponItem;
+      required bool isDone,
+      required CouponEffectType effectType,
+      required String extra}) = _CouponItem;
 
-  factory CouponItem.fromJson(Map<String,dynamic> json) =>
+  factory CouponItem.fromJson(Map<String, dynamic> json) =>
       _$CouponItemFromJson(json);
 
-  bool couldBeUsed() {
-    return usedType.map(
-      oneTime: (v) => !v.isUsed,
+  CouponItem afterUsed() {
+    final afterUsedUsedType = usedType.afterUsed();
+    return copyWith(
+        usedType: afterUsedUsedType, isDone: _calcIsDone(afterUsedUsedType));
+  }
+
+  bool _calcIsDone(CouponUsedType used) {
+    return used.map(
+      oneTime: (v) => true,
       untilExpire: (v) => expire.isAfter(DateTime.now()),
-      countTime: (v) =>
-          v.count <
-          v.ids
-              .length, //TODO check if same person used it before (or could be done on the server rule)
+      countTime: (v) => v.count < v.ids.length,
     );
   }
 }

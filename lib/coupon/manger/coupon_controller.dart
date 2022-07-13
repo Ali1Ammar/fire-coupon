@@ -44,7 +44,7 @@ class CouponController extends StateController<CouponPageState> {
     CouponUsedType usedType;
     switch (oldInitState.couponUsedTypeEnum) {
       case CouponUsedTypeEnum.oneTime:
-        usedType = const CouponUsedType.oneTime(false);
+        usedType = const CouponUsedType.oneTime();
         break;
       case CouponUsedTypeEnum.untilExpire:
         usedType = const CouponUsedType.untilExpire();

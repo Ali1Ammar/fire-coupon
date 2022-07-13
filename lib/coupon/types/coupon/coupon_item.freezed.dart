@@ -24,6 +24,7 @@ mixin _$CouponItem {
   String get code => throw _privateConstructorUsedError;
   DateTime get expire => throw _privateConstructorUsedError;
   CouponUsedType get usedType => throw _privateConstructorUsedError;
+  bool get isDone => throw _privateConstructorUsedError;
   CouponEffectType get effectType => throw _privateConstructorUsedError;
   String get extra => throw _privateConstructorUsedError;
 
@@ -43,6 +44,7 @@ abstract class $CouponItemCopyWith<$Res> {
       String code,
       DateTime expire,
       CouponUsedType usedType,
+      bool isDone,
       CouponEffectType effectType,
       String extra});
 
@@ -64,6 +66,7 @@ class _$CouponItemCopyWithImpl<$Res> implements $CouponItemCopyWith<$Res> {
     Object? code = freezed,
     Object? expire = freezed,
     Object? usedType = freezed,
+    Object? isDone = freezed,
     Object? effectType = freezed,
     Object? extra = freezed,
   }) {
@@ -84,6 +87,10 @@ class _$CouponItemCopyWithImpl<$Res> implements $CouponItemCopyWith<$Res> {
           ? _value.usedType
           : usedType // ignore: cast_nullable_to_non_nullable
               as CouponUsedType,
+      isDone: isDone == freezed
+          ? _value.isDone
+          : isDone // ignore: cast_nullable_to_non_nullable
+              as bool,
       effectType: effectType == freezed
           ? _value.effectType
           : effectType // ignore: cast_nullable_to_non_nullable
@@ -122,6 +129,7 @@ abstract class _$$_CouponItemCopyWith<$Res>
       String code,
       DateTime expire,
       CouponUsedType usedType,
+      bool isDone,
       CouponEffectType effectType,
       String extra});
 
@@ -147,6 +155,7 @@ class __$$_CouponItemCopyWithImpl<$Res> extends _$CouponItemCopyWithImpl<$Res>
     Object? code = freezed,
     Object? expire = freezed,
     Object? usedType = freezed,
+    Object? isDone = freezed,
     Object? effectType = freezed,
     Object? extra = freezed,
   }) {
@@ -167,6 +176,10 @@ class __$$_CouponItemCopyWithImpl<$Res> extends _$CouponItemCopyWithImpl<$Res>
           ? _value.usedType
           : usedType // ignore: cast_nullable_to_non_nullable
               as CouponUsedType,
+      isDone: isDone == freezed
+          ? _value.isDone
+          : isDone // ignore: cast_nullable_to_non_nullable
+              as bool,
       effectType: effectType == freezed
           ? _value.effectType
           : effectType // ignore: cast_nullable_to_non_nullable
@@ -187,6 +200,7 @@ class _$_CouponItem extends _CouponItem {
       required this.code,
       required this.expire,
       required this.usedType,
+      required this.isDone,
       required this.effectType,
       required this.extra})
       : super._();
@@ -203,13 +217,15 @@ class _$_CouponItem extends _CouponItem {
   @override
   final CouponUsedType usedType;
   @override
+  final bool isDone;
+  @override
   final CouponEffectType effectType;
   @override
   final String extra;
 
   @override
   String toString() {
-    return 'CouponItem(name: $name, code: $code, expire: $expire, usedType: $usedType, effectType: $effectType, extra: $extra)';
+    return 'CouponItem(name: $name, code: $code, expire: $expire, usedType: $usedType, isDone: $isDone, effectType: $effectType, extra: $extra)';
   }
 
   @override
@@ -221,6 +237,7 @@ class _$_CouponItem extends _CouponItem {
             const DeepCollectionEquality().equals(other.code, code) &&
             const DeepCollectionEquality().equals(other.expire, expire) &&
             const DeepCollectionEquality().equals(other.usedType, usedType) &&
+            const DeepCollectionEquality().equals(other.isDone, isDone) &&
             const DeepCollectionEquality()
                 .equals(other.effectType, effectType) &&
             const DeepCollectionEquality().equals(other.extra, extra));
@@ -234,6 +251,7 @@ class _$_CouponItem extends _CouponItem {
       const DeepCollectionEquality().hash(code),
       const DeepCollectionEquality().hash(expire),
       const DeepCollectionEquality().hash(usedType),
+      const DeepCollectionEquality().hash(isDone),
       const DeepCollectionEquality().hash(effectType),
       const DeepCollectionEquality().hash(extra));
 
@@ -254,6 +272,7 @@ abstract class _CouponItem extends CouponItem {
       required final String code,
       required final DateTime expire,
       required final CouponUsedType usedType,
+      required final bool isDone,
       required final CouponEffectType effectType,
       required final String extra}) = _$_CouponItem;
   const _CouponItem._() : super._();
@@ -269,6 +288,8 @@ abstract class _CouponItem extends CouponItem {
   DateTime get expire;
   @override
   CouponUsedType get usedType;
+  @override
+  bool get isDone;
   @override
   CouponEffectType get effectType;
   @override

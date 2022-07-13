@@ -11,3 +11,5 @@ export 'coupon/types/types.dart';
 
 export 'coupon/manger/coupon_controller.dart';
 export 'coupon/client/coupon_use_controller.dart';
+
+export 'shared/logic/firebase_db.dart';

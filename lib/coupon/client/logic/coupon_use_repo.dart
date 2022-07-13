@@ -21,6 +21,14 @@ class CouponUseRepo {
     init();
   }
 
+  clear() async {
+    final sharedPreferences = await SharedPreferences.getInstance();
+    sharedPreferences.remove("UsedCouponItems");
+    _items.clear();
+    _addToState();
+  }
+
+  bool has(String item)=> _items.any((d)=>d.code==item);
   init() async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final res = sharedPreferences.getString("UsedCouponItems");
@@ -42,7 +50,7 @@ class CouponUseRepo {
   }
 
   add(CouponItem item) {
-    _items.add(item);
+    _items = [item, ..._items];
     _reSave();
   }
 

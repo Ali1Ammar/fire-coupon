@@ -7,7 +7,7 @@ part "coupon_used_type.g.dart";
 class CouponUsedType with _$CouponUsedType {
   const CouponUsedType._();
 
-  const factory CouponUsedType.oneTime(bool isUsed) = OneTimeCoupon;
+  const factory CouponUsedType.oneTime() = OneTimeCoupon;
   const factory CouponUsedType.untilExpire() = UntilExpireCoupon;
   const factory CouponUsedType.countTime(int count,List<String> ids) = CountTimeCoupon;
 
@@ -15,11 +15,10 @@ class CouponUsedType with _$CouponUsedType {
 
    CouponUsedType afterUsed()=>
     map(
-      oneTime: (v) => v.copyWith(isUsed: true),
+      oneTime: (v) => v,
       untilExpire: (v) => v,
       countTime: (v) => v.copyWith(ids: v.ids..add("")),//TODO add real id
     );
-  
 }
 
 

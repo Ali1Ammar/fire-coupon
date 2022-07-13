@@ -1,0 +1,20 @@
+{
+    "rules": {
+        "Coupon": {
+            "counter":{
+                ".read": "auth!=null && auth.token.email === 'sjajiq125@gmail.com'",
+                ".write": "auth!=null && auth.token.email==='sjajiq125@gmail.com'"
+            },
+            "items":{
+                ".read": "auth!=null",
+                ".write": "auth!=null && ( (!data.exists()  && auth.token.email==='sjajiq125@gmail.com') || (data.exists() ) ) ",
+                "$id" : {
+                    "isDone" : {
+                        ".read": "auth!=null",
+                        ".write": "auth!=null && !data"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ import 'package:coupon/coupon/types/coupon/coupon_item.dart';
 import 'package:coupon/coupon/manger/logic/generate_hashid.dart';
 import 'package:coupon/coupon/types/effect/coupon_effect_type.dart';
 import 'package:coupon/coupon/types/used/coupon_used_type.dart';
+import 'package:coupon/shared/logic/error.dart';
 import 'package:coupon/shared/logic/firebase_db.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -15,7 +16,7 @@ final couponServiceProvider = Provider((_) {
   return FakeCouponService();
 });
 
-class CouponService with FirebaseDb implements ICouponService {
+class CouponService with CouponFirebaseDb implements ICouponService {
   final _generator = GenetateHashId();
 
   @override
@@ -33,6 +34,7 @@ class CouponService with FirebaseDb implements ICouponService {
         expire: expireAt,
         usedType: usedType,
         effectType: effectType,
+        isDone: false,
         extra: extra);
     await codeRef(hashId).set(item.toJson());
     return item;
@@ -54,6 +56,7 @@ class CouponService with FirebaseDb implements ICouponService {
         expire: expireAt,
         usedType: usedType,
         effectType: effectType,
+        isDone: false,
         extra: extra));
     final json =
         Map.fromEntries(items.map((e) => MapEntry(e.code, e.toJson())));
@@ -68,7 +71,9 @@ class CouponService with FirebaseDb implements ICouponService {
       }
       final number = value as int;
       return Transaction.success(number + 1);
-    });
+    }).catchError((err) {
+      throw UnAuthCouponException();
+    }, test: isPermissionError);
     final number = (res.snapshot.value as int) - 1;
     return number;
   }
@@ -81,7 +86,9 @@ class CouponService with FirebaseDb implements ICouponService {
       }
       final number = value as int;
       return Transaction.success(number + numberToGet);
-    }, applyLocally: false);
+    }, applyLocally: false).catchError((err) {
+      throw UnAuthCouponException();
+    }, test: isPermissionError);
     final number = (res.snapshot.value as int) - numberToGet;
     return number;
   }

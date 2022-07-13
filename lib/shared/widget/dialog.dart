@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 showString(BuildContext context, String txt) {
   showDialog(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (context) => AlertDialog(
             title: const Text('alert'),
             content: Text(txt),
             actions: [
