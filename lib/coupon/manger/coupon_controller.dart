@@ -10,28 +10,27 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 final defualtInit = CouponPageState.init(
-          name: "remove ads",
-          countCoupon: 2,
-          countUsed: 2,
-          couponEffectType: CouponEffectTypeEnum.forDuration,
-          couponUsedTypeEnum: CouponUsedTypeEnum.oneTime,
-          day: 1,
-          week: 1,
-          expireCupon: DateTime.now().add(const Duration(days: 1)),
-        );
+  name: "remove ads",
+  countCoupon: 2,
+  countUsed: 2,
+  couponEffectType: CouponEffectTypeEnum.forDuration,
+  couponUsedTypeEnum: CouponUsedTypeEnum.oneTime,
+  day: 1,
+  week: 1,
+  expireCupon: DateTime.now().add(const Duration(days: 1)),
+);
 
 final couponControllerProvider =
     StateNotifierProvider<CouponController, CouponPageState>((_) =>
-        CouponController(_.watch(couponServiceProvider),
-            _.watch(couponRepoProvider), _.read));
+        CouponController(
+            _.watch(couponServiceProvider), _.watch(couponRepoProvider), _));
 
 class CouponController extends StateController<CouponPageState> {
   final ICouponService service;
   final CouponRepo repo;
-  final Reader read;
-  
-  CouponController(this.service, this.repo, this.read)
-      : super(defualtInit);
+  final Ref ref;
+
+  CouponController(this.service, this.repo, this.ref) : super(defualtInit);
 
   void changeState(InitState newState) {
     state = newState;
@@ -72,12 +71,14 @@ class CouponController extends StateController<CouponPageState> {
           oldInitState.name,
           "remove-ad",
           oldInitState.countCoupon);
-          state = defualtInit;
-      read(navigatorKeyProvider).currentState!.push(
-                      MaterialPageRoute(builder: (_) => CreatedCouponPage(items:res ,) ));
+      state = defualtInit;
+      ref.read(navigatorKeyProvider).currentState!.push(MaterialPageRoute(
+          builder: (_) => CreatedCouponPage(
+                items: res,
+              )));
     } catch (e, s) {
       state = CouponPageState.error(e, s);
-      showString(read(navigatorKeyProvider).currentContext!, e.toString());
+      showString(ref.read(navigatorKeyProvider).currentContext!, e.toString());
 
       rethrow;
     }

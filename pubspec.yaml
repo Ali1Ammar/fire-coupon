@@ -20,7 +20,7 @@ dependencies:
   flutter_hooks: ^0.18.5+1
   freezed_annotation: 
   hashids2: ^2.0.0
-  hooks_riverpod: ^2.0.0-dev.9
+  hooks_riverpod: ^2.0.0
   intl: ^0.17.0
   shared_preferences: ^2.0.15
 
