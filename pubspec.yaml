@@ -13,7 +13,7 @@ dependencies:
   analyzer: ^4.2.0
   firebase_auth: ^3.4.0
   firebase_core: ^1.19.1
-  firebase_database: ^9.0.17
+  firebase_database: ^10.0.1
   flutter:
     sdk: flutter
 
